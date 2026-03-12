@@ -6,16 +6,11 @@ document.addEventListener('alpine:init', () => {
         outputTokens: 500000,
         inputSlider: 60,
         outputSlider: 57,
-        loading: true,
 
-        async init() {
-            const [providers, models] = await Promise.all([
-                fetch('data/providers.json').then(r => r.json()).catch(() => []),
-                fetch('data/models.json').then(r => r.json()).catch(() => [])
-            ]);
-            this.providers = providers;
-            this.models = models;
-            this.loading = false;
+        init() {
+            // Sync from parent data
+            this.syncFromParent();
+            window.addEventListener('tkn-data-changed', () => this.syncFromParent());
 
             this.$watch('inputSlider', val => {
                 this.inputTokens = this.sliderToTokens(val);
@@ -23,6 +18,11 @@ document.addEventListener('alpine:init', () => {
             this.$watch('outputSlider', val => {
                 this.outputTokens = this.sliderToTokens(val);
             });
+        },
+
+        syncFromParent() {
+            if (window._tknModels) this.models = [...window._tknModels];
+            if (window._tknProviders) this.providers = [...window._tknProviders];
         },
 
         sliderToTokens(val) {
@@ -44,7 +44,10 @@ document.addEventListener('alpine:init', () => {
         get results() {
             if (!this.models.length) return [];
 
-            const results = this.models.map(m => {
+            // Filter out attention-tier models from cost calc (different unit)
+            const aiModels = this.models.filter(m => m.tier !== 'attention');
+
+            const results = aiModels.map(m => {
                 const monthlyCost = (this.inputTokens / 1000000) * m.input_price +
                                     (this.outputTokens / 1000000) * m.output_price;
                 return { ...m, monthlyCost };
@@ -59,6 +62,19 @@ document.addEventListener('alpine:init', () => {
                 savingsPercent: maxCost > 0 ? ((1 - m.monthlyCost / maxCost) * 100).toFixed(0) : 0,
                 barWidth: maxCost > 0 ? (m.monthlyCost / maxCost * 100) : 0
             }));
+        },
+
+        get attentionResults() {
+            const attentionModels = this.models.filter(m => m.tier === 'attention');
+            if (!attentionModels.length) return [];
+
+            // For attention tokens: cost of buying X tokens
+            const tokenCount = this.inputTokens;
+            return attentionModels.map(m => ({
+                ...m,
+                totalCost: tokenCount * (m.input_price / 1000000),
+                performerEarns: tokenCount * (m.output_price / 1000000)
+            })).sort((a, b) => a.totalCost - b.totalCost);
         }
     }));
 });

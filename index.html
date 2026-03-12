@@ -53,7 +53,8 @@
                                 class="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-all cursor-pointer leading-tight"
                                 title="Toggle attention economy tokens">18+</button>
                     </h1>
-                    <p class="text-gray-400 mt-1 text-sm sm:text-base">The cost of intelligence, tracked.</p>
+                    <p class="text-gray-400 mt-1 text-sm sm:text-base">The cost of
+                        <span x-show="!nsfwActive">intelligence</span><span x-show="nsfwActive" class="text-tkn-500">intelligence</span><span x-show="nsfwActive" class="text-pink-400">, attention</span>, tracked.</p>
                 </div>
                 <div class="text-right text-xs text-gray-500">
                     <p>Last updated</p>
@@ -94,30 +95,28 @@
         <div x-show="tab === 'table' && !loading" x-cloak>
 
             <!-- Filters -->
-            <div class="flex flex-wrap items-center gap-4 mb-6">
+            <div class="flex items-center gap-2 mb-6 flex-wrap">
                 <!-- Search -->
-                <div class="relative flex-1 min-w-[200px] max-w-xs">
-                    <input type="text" x-model="search" placeholder="Search models..."
-                           class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-tkn-500">
-                    <kbd class="absolute right-3 top-2.5 text-xs text-gray-600 font-mono">/</kbd>
+                <div class="relative min-w-[160px] max-w-[200px]">
+                    <input type="text" x-model="search" placeholder="Search..."
+                           class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-1.5 text-xs text-gray-100 placeholder-gray-500 focus:outline-none focus:border-tkn-500">
+                    <kbd class="absolute right-2 top-1.5 text-[10px] text-gray-600 font-mono">/</kbd>
                 </div>
 
-                <!-- Provider filters -->
-                <div class="flex gap-2 flex-wrap">
-                    <template x-for="provider in providers" :key="provider.id">
-                        <button @click="toggleProvider(provider.id)"
-                                :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20 ring-1 ring-white/20' : (highlightProvider ? 'border-opacity-30 bg-opacity-0 opacity-50' : 'border-opacity-50 bg-opacity-0')"
-                                :style="`border-color: ${provider.color}; background-color: ${provider.color}`"
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-all cursor-pointer hover:opacity-100">
-                            <span class="provider-dot" :style="`background-color: ${provider.color}`"></span>
-                            <span x-text="provider.display_name"></span>
-                        </button>
-                    </template>
-                </div>
+                <!-- Provider pills -->
+                <template x-for="provider in providers" :key="provider.id">
+                    <button @click="toggleProvider(provider.id)"
+                            :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20 ring-1 ring-white/20' : (highlightProvider ? 'border-opacity-30 bg-opacity-0 opacity-50' : 'border-opacity-50 bg-opacity-0')"
+                            :style="`border-color: ${provider.color}; background-color: ${provider.color}`"
+                            class="flex items-center gap-1 px-2 py-1 rounded-full border text-[11px] font-medium transition-all cursor-pointer hover:opacity-100">
+                        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${provider.color}`"></span>
+                        <span x-text="provider.display_name"></span>
+                    </button>
+                </template>
 
-                <!-- Tier filter -->
+                <!-- Tier dropdown -->
                 <select x-model="filterTier"
-                        class="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-100 focus:outline-none focus:border-tkn-500">
+                        class="bg-gray-900 border border-gray-700 rounded px-2 py-1.5 text-[11px] text-gray-100 focus:outline-none focus:border-tkn-500">
                     <option value="all">All tiers</option>
                     <option value="flagship">Flagship</option>
                     <option value="balanced">Balanced</option>
@@ -151,7 +150,6 @@
                             <th class="text-right px-4 py-3" @click="toggleSort('context_window')">
                                 Context <span class="ml-1" x-text="sortIcon('context_window')"></span>
                             </th>
-                            <th class="text-center px-4 py-3">Features</th>
                             <th class="text-center px-4 py-3" @click="toggleSort('speed')">
                                 Speed <span class="ml-1" x-text="sortIcon('speed')"></span>
                             </th>
@@ -188,14 +186,6 @@
                                 <td class="px-4 py-3 text-right font-mono text-sm text-gray-300">
                                     <span x-show="model.tier !== 'attention'" x-text="formatContext(model.context_window)"></span>
                                     <span x-show="model.tier === 'attention'" class="text-pink-400/60 text-xs">&infin;</span>
-                                </td>
-                                <td class="px-4 py-3 text-center">
-                                    <div class="flex items-center justify-center gap-1.5" x-show="model.tier !== 'attention'">
-                                        <span x-show="model.supports_vision" class="feature-badge bg-purple-500/20 text-purple-400">Vision</span>
-                                        <span x-show="model.supports_tools" class="feature-badge bg-cyan-500/20 text-cyan-400">Tools</span>
-                                        <span x-show="model.reasoning" class="feature-badge bg-rose-500/20 text-rose-400">Reasoning</span>
-                                    </div>
-                                    <span x-show="model.tier === 'attention'" class="feature-badge bg-pink-500/20 text-pink-400" x-text="model.platform_cut_pct + '% cut'"></span>
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     <span x-show="model.speed" class="feature-badge"
@@ -296,6 +286,28 @@
                         <strong class="text-tkn-400 font-mono" x-text="'$' + (results[results.length-1]?.monthlyCost - results[0]?.monthlyCost).toFixed(2)"></strong>/mo
                         vs <span x-text="results[results.length-1]?.name"></span>.
                     </p>
+                </div>
+
+                <!-- Attention economy comparison (when 18+ active) -->
+                <div x-show="attentionResults.length > 0" x-cloak class="mt-8 pt-8 border-t border-pink-500/20">
+                    <h3 class="text-lg font-semibold text-pink-400 mb-4">Attention Economy</h3>
+                    <p class="text-xs text-gray-500 mb-4">Same number of tokens, but for human attention instead of compute.</p>
+                    <div class="space-y-2">
+                        <template x-for="(a, i) in attentionResults" :key="a.id">
+                            <div class="flex items-center gap-4 py-2 px-4 rounded-lg bg-pink-500/5 border border-pink-500/10">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${providerColor(a.provider)}`"></span>
+                                <span class="text-sm font-medium w-40 truncate" x-text="a.name"></span>
+                                <div class="flex-1 text-right">
+                                    <span class="font-mono text-sm text-pink-400" x-text="'$' + a.totalCost.toLocaleString(undefined, {maximumFractionDigits: 0})"></span>
+                                    <span class="text-xs text-gray-500"> buy</span>
+                                </div>
+                                <div class="text-right w-32">
+                                    <span class="font-mono text-sm text-gray-400" x-text="'$' + a.performerEarns.toLocaleString(undefined, {maximumFractionDigits: 0})"></span>
+                                    <span class="text-xs text-gray-500"> to performer</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
                 </div>
             </div>
         </div>

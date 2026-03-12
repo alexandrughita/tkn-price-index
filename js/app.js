@@ -21,6 +21,14 @@ document.addEventListener('alpine:init', () => {
             this.providers = providers;
             this.models = models;
             this.loading = false;
+            this.syncSharedData();
+        },
+
+        syncSharedData() {
+            window._tknModels = this.models;
+            window._tknProviders = this.providers;
+            window._tknNsfw = this.nsfwActive;
+            window.dispatchEvent(new CustomEvent('tkn-data-changed'));
         },
 
         async toggleNsfw() {
@@ -61,6 +69,7 @@ document.addEventListener('alpine:init', () => {
                 this.models = this.models.filter(m => !nsfwIds.includes(m.provider));
                 if (nsfwIds.includes(this.highlightProvider)) this.highlightProvider = null;
             }
+            this.syncSharedData();
         },
 
         get allProviders() {
