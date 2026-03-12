@@ -318,6 +318,25 @@
                         </template>
                     </div>
                 </div>
+
+                <!-- Cryptic signup -->
+                <div class="mt-12 pt-8 border-t border-gray-800/30" x-data="{ email: '', submitted: false }">
+                    <div x-show="!submitted">
+                        <p class="text-xs text-gray-600 font-mono">When the three economies merge, which side will you be on?</p>
+                        <p class="text-[10px] text-gray-700 mt-1">The unit is coming. Be early.</p>
+                        <div class="flex gap-2 mt-3 max-w-sm">
+                            <input type="email" x-model="email" placeholder="your@email"
+                                   class="flex-1 bg-gray-900/50 border border-gray-800 rounded px-3 py-1.5 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
+                            <button @click="submitted = true"
+                                    class="px-3 py-1.5 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
+                                signal
+                            </button>
+                        </div>
+                    </div>
+                    <p x-show="submitted" x-cloak class="text-xs text-gray-600 font-mono">
+                        Noted. You'll know when the unit is ready.
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -349,6 +368,25 @@
                 <p class="text-xs text-gray-600 mt-4">
                     Showing flagship models only. More data points will appear as prices are tracked monthly.
                 </p>
+
+                <!-- Cryptic signup -->
+                <div class="mt-12 pt-8 border-t border-gray-800/30" x-data="{ email: '', submitted: false }">
+                    <div x-show="!submitted">
+                        <p class="text-xs text-gray-600 font-mono">200 TKN/day for a bot. 15,000 for a human. The market won't care which one is conscious.</p>
+                        <p class="text-[10px] text-gray-700 mt-1">We're building the unit. Get notified.</p>
+                        <div class="flex gap-2 mt-3 max-w-sm">
+                            <input type="email" x-model="email" placeholder="your@email"
+                                   class="flex-1 bg-gray-900/50 border border-gray-800 rounded px-3 py-1.5 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
+                            <button @click="submitted = true"
+                                    class="px-3 py-1.5 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
+                                signal
+                            </button>
+                        </div>
+                    </div>
+                    <p x-show="submitted" x-cloak class="text-xs text-gray-600 font-mono">
+                        Noted. You'll know when the unit is ready.
+                    </p>
+                </div>
             </div>
         </div>
 
