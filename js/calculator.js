@@ -1,11 +1,22 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('calculator', () => ({
+        models: [],
+        providers: [],
         inputTokens: 1000000,
         outputTokens: 500000,
         inputSlider: 60,
         outputSlider: 57,
+        loading: true,
 
-        init() {
+        async init() {
+            const [providers, models] = await Promise.all([
+                fetch('data/providers.json').then(r => r.json()).catch(() => []),
+                fetch('data/models.json').then(r => r.json()).catch(() => [])
+            ]);
+            this.providers = providers;
+            this.models = models;
+            this.loading = false;
+
             this.$watch('inputSlider', val => {
                 this.inputTokens = this.sliderToTokens(val);
             });
@@ -15,15 +26,8 @@ document.addEventListener('alpine:init', () => {
         },
 
         sliderToTokens(val) {
-            // Logarithmic: 0=10K, 25=100K, 50=1M, 75=10M, 100=100M
-            const exp = 4 + (val / 100) * 3; // 4 to 7
+            const exp = 4 + (val / 100) * 3;
             return Math.round(Math.pow(10, exp));
-        },
-
-        tokensToSlider(tokens) {
-            if (tokens <= 0) return 0;
-            const exp = Math.log10(tokens);
-            return Math.round(((exp - 4) / 3) * 100);
         },
 
         formatTokens(n) {
@@ -33,12 +37,14 @@ document.addEventListener('alpine:init', () => {
             return n.toString();
         },
 
-        get results() {
-            const models = Alpine.raw(this.$data.$root._x_dataStack?.[0]?.models) ||
-                           window._priceIndexModels || [];
-            if (!models.length) return [];
+        providerColor(id) {
+            return this.providers.find(p => p.id === id)?.color || '#666';
+        },
 
-            const results = models.map(m => {
+        get results() {
+            if (!this.models.length) return [];
+
+            const results = this.models.map(m => {
                 const monthlyCost = (this.inputTokens / 1000000) * m.input_price +
                                     (this.outputTokens / 1000000) * m.output_price;
                 return { ...m, monthlyCost };
