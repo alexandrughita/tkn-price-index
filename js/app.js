@@ -74,14 +74,19 @@ document.addEventListener('alpine:init', () => {
 
             // Sort: highlighted provider first, then by sort column
             const hp = this.highlightProvider;
+            const speedOrder = { fast: 1, medium: 2, slow: 3 };
             result.sort((a, b) => {
                 if (hp) {
                     const aH = a.provider === hp ? 0 : 1;
                     const bH = b.provider === hp ? 0 : 1;
                     if (aH !== bH) return aH - bH;
                 }
-                const aVal = a[this.sortBy] ?? 0;
-                const bVal = b[this.sortBy] ?? 0;
+                let aVal = a[this.sortBy] ?? 0;
+                let bVal = b[this.sortBy] ?? 0;
+                if (this.sortBy === 'speed') {
+                    aVal = speedOrder[aVal] ?? 99;
+                    bVal = speedOrder[bVal] ?? 99;
+                }
                 if (typeof aVal === 'string') {
                     return this.sortAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
                 }

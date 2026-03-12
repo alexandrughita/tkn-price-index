@@ -11,7 +11,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2026-02"
+    "released": "2026-02",
+    "params": null,
+    "speed": "slow",
+    "description": "Most capable Claude. 1M context in beta."
   },
   {
     "id": "claude-sonnet-4-6",
@@ -25,7 +28,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2026-02"
+    "released": "2026-02",
+    "params": null,
+    "speed": "medium",
+    "description": "Best balance of speed and capability."
   },
   {
     "id": "claude-haiku-4-5",
@@ -39,7 +45,61 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-10"
+    "released": "2025-10",
+    "params": null,
+    "speed": "fast",
+    "description": "Fastest and cheapest Claude."
+  },
+  {
+    "id": "claude-sonnet-4-5",
+    "name": "Claude Sonnet 4.5",
+    "provider": "anthropic",
+    "tier": "balanced",
+    "input_price": 3.00,
+    "output_price": 15.00,
+    "context_window": 200000,
+    "max_output": 64000,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-12",
+    "params": null,
+    "speed": "medium",
+    "description": "Previous gen Sonnet. Still widely used."
+  },
+  {
+    "id": "claude-opus-4-1",
+    "name": "Claude Opus 4.1",
+    "provider": "anthropic",
+    "tier": "flagship",
+    "input_price": 15.00,
+    "output_price": 75.00,
+    "context_window": 200000,
+    "max_output": 32000,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-07",
+    "params": null,
+    "speed": "slow",
+    "description": "Legacy flagship. Premium pricing."
+  },
+  {
+    "id": "claude-3-haiku",
+    "name": "Claude 3 Haiku",
+    "provider": "anthropic",
+    "tier": "budget",
+    "input_price": 0.25,
+    "output_price": 1.25,
+    "context_window": 200000,
+    "max_output": 4096,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2024-03",
+    "params": null,
+    "speed": "fast",
+    "description": "Ultra-cheap legacy model."
   },
   {
     "id": "gpt-5.4",
@@ -53,7 +113,44 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2026-01"
+    "released": "2026-01",
+    "params": null,
+    "speed": "medium",
+    "description": "Latest flagship. 1.05M long context available."
+  },
+  {
+    "id": "gpt-5.2",
+    "name": "GPT-5.2",
+    "provider": "openai",
+    "tier": "flagship",
+    "input_price": 1.75,
+    "output_price": 14.00,
+    "context_window": 400000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-11",
+    "params": null,
+    "speed": "medium",
+    "description": "400K context. Strong all-rounder."
+  },
+  {
+    "id": "gpt-5.1",
+    "name": "GPT-5.1",
+    "provider": "openai",
+    "tier": "balanced",
+    "input_price": 1.25,
+    "output_price": 10.00,
+    "context_window": 400000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-09",
+    "params": null,
+    "speed": "medium",
+    "description": "Good value mid-range GPT-5."
   },
   {
     "id": "gpt-5-mini",
@@ -67,7 +164,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-12"
+    "released": "2025-12",
+    "params": null,
+    "speed": "fast",
+    "description": "Lightweight. Great for simple tasks."
   },
   {
     "id": "gpt-5-nano",
@@ -81,7 +181,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-12"
+    "released": "2025-12",
+    "params": null,
+    "speed": "fast",
+    "description": "Ultra-cheap. Classification and routing."
   },
   {
     "id": "gpt-4.1",
@@ -95,7 +198,78 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-04"
+    "released": "2025-04",
+    "params": null,
+    "speed": "medium",
+    "description": "1M context. Strong coding model."
+  },
+  {
+    "id": "gpt-4.1-mini",
+    "name": "GPT-4.1 Mini",
+    "provider": "openai",
+    "tier": "budget",
+    "input_price": 0.40,
+    "output_price": 1.60,
+    "context_window": 1000000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-04",
+    "params": null,
+    "speed": "fast",
+    "description": "1M context at budget price."
+  },
+  {
+    "id": "gpt-4.1-nano",
+    "name": "GPT-4.1 Nano",
+    "provider": "openai",
+    "tier": "budget",
+    "input_price": 0.10,
+    "output_price": 0.40,
+    "context_window": 1000000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-04",
+    "params": null,
+    "speed": "fast",
+    "description": "Cheapest 1M context model."
+  },
+  {
+    "id": "gpt-4o",
+    "name": "GPT-4o",
+    "provider": "openai",
+    "tier": "balanced",
+    "input_price": 2.50,
+    "output_price": 10.00,
+    "context_window": 128000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2024-05",
+    "params": null,
+    "speed": "medium",
+    "description": "Multimodal flagship (previous gen)."
+  },
+  {
+    "id": "gpt-4o-mini",
+    "name": "GPT-4o Mini",
+    "provider": "openai",
+    "tier": "budget",
+    "input_price": 0.15,
+    "output_price": 0.60,
+    "context_window": 128000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2024-07",
+    "params": null,
+    "speed": "fast",
+    "description": "Budget GPT-4o. Still very capable."
   },
   {
     "id": "o3",
@@ -109,7 +283,27 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": true,
-    "released": "2025-07"
+    "released": "2025-07",
+    "params": null,
+    "speed": "slow",
+    "description": "Reasoning model. Complex problem solving."
+  },
+  {
+    "id": "o3-mini",
+    "name": "o3 Mini",
+    "provider": "openai",
+    "tier": "balanced",
+    "input_price": 1.10,
+    "output_price": 4.40,
+    "context_window": 200000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": true,
+    "released": "2025-07",
+    "params": null,
+    "speed": "medium",
+    "description": "Lighter reasoning model."
   },
   {
     "id": "o4-mini",
@@ -123,7 +317,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": true,
-    "released": "2025-11"
+    "released": "2025-11",
+    "params": null,
+    "speed": "medium",
+    "description": "Budget reasoning. Best value for chain-of-thought."
   },
   {
     "id": "gemini-3.1-pro",
@@ -137,7 +334,27 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2026-02"
+    "released": "2026-02",
+    "params": null,
+    "speed": "medium",
+    "description": "Latest Gemini. Price doubles above 200K input."
+  },
+  {
+    "id": "gemini-3.1-flash-lite",
+    "name": "Gemini 3.1 Flash-Lite",
+    "provider": "google",
+    "tier": "budget",
+    "input_price": 0.25,
+    "output_price": 1.50,
+    "context_window": 1000000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2026-02",
+    "params": null,
+    "speed": "fast",
+    "description": "Latest budget Gemini. Free tier available."
   },
   {
     "id": "gemini-2.5-pro",
@@ -151,7 +368,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-06"
+    "released": "2025-06",
+    "params": null,
+    "speed": "medium",
+    "description": "Production workhorse. 1M context."
   },
   {
     "id": "gemini-2.5-flash",
@@ -165,7 +385,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-06"
+    "released": "2025-06",
+    "params": null,
+    "speed": "fast",
+    "description": "Fast and affordable. Great for high-volume."
   },
   {
     "id": "gemini-2.5-flash-lite",
@@ -179,7 +402,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-09"
+    "released": "2025-09",
+    "params": null,
+    "speed": "fast",
+    "description": "Ultra-budget. Competes with GPT-5 Nano."
   },
   {
     "id": "mistral-large-3",
@@ -193,7 +419,44 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-12"
+    "released": "2025-12",
+    "params": null,
+    "speed": "medium",
+    "description": "Best Mistral. Aggressively priced."
+  },
+  {
+    "id": "mistral-medium-3.1",
+    "name": "Mistral Medium 3.1",
+    "provider": "mistral",
+    "tier": "balanced",
+    "input_price": 0.40,
+    "output_price": 2.00,
+    "context_window": 131000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-11",
+    "params": null,
+    "speed": "medium",
+    "description": "Mid-range Mistral."
+  },
+  {
+    "id": "mistral-small-3.2",
+    "name": "Mistral Small 3.2",
+    "provider": "mistral",
+    "tier": "budget",
+    "input_price": 0.06,
+    "output_price": 0.18,
+    "context_window": 131000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2026-01",
+    "params": "24B",
+    "speed": "fast",
+    "description": "24B params. Cheapest Mistral with vision."
   },
   {
     "id": "mistral-small-3.1",
@@ -207,7 +470,10 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-09"
+    "released": "2025-09",
+    "params": "24B",
+    "speed": "fast",
+    "description": "24B open-weight model."
   },
   {
     "id": "codestral",
@@ -221,7 +487,61 @@
     "supports_vision": false,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-08"
+    "released": "2025-08",
+    "params": null,
+    "speed": "fast",
+    "description": "Code-specialized. 256K context."
+  },
+  {
+    "id": "magistral-medium",
+    "name": "Magistral Medium",
+    "provider": "mistral",
+    "tier": "flagship",
+    "input_price": 2.00,
+    "output_price": 5.00,
+    "context_window": 40000,
+    "max_output": null,
+    "supports_vision": false,
+    "supports_tools": true,
+    "reasoning": true,
+    "released": "2026-01",
+    "params": null,
+    "speed": "slow",
+    "description": "Mistral's reasoning model."
+  },
+  {
+    "id": "ministral-8b",
+    "name": "Ministral 8B",
+    "provider": "mistral",
+    "tier": "budget",
+    "input_price": 0.10,
+    "output_price": 0.10,
+    "context_window": 128000,
+    "max_output": null,
+    "supports_vision": false,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-06",
+    "params": "8B",
+    "speed": "fast",
+    "description": "Tiny model. Same input/output price."
+  },
+  {
+    "id": "mistral-nemo",
+    "name": "Mistral Nemo",
+    "provider": "mistral",
+    "tier": "budget",
+    "input_price": 0.02,
+    "output_price": 0.04,
+    "context_window": 131000,
+    "max_output": null,
+    "supports_vision": false,
+    "supports_tools": false,
+    "reasoning": false,
+    "released": "2025-03",
+    "params": "12B",
+    "speed": "fast",
+    "description": "Cheapest API model available anywhere."
   },
   {
     "id": "grok-4.20-beta",
@@ -235,7 +555,27 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": true,
-    "released": "2026-02"
+    "released": "2026-02",
+    "params": null,
+    "speed": "slow",
+    "description": "2M context. Reasoning. Latest Grok."
+  },
+  {
+    "id": "grok-4-1-fast",
+    "name": "Grok 4-1 Fast",
+    "provider": "xai",
+    "tier": "budget",
+    "input_price": 0.20,
+    "output_price": 0.50,
+    "context_window": 2000000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": true,
+    "released": "2026-01",
+    "params": null,
+    "speed": "fast",
+    "description": "Cheapest 2M context + reasoning combo."
   },
   {
     "id": "grok-4-fast",
@@ -249,7 +589,44 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": true,
-    "released": "2026-01"
+    "released": "2025-12",
+    "params": null,
+    "speed": "fast",
+    "description": "Fast reasoning at ultra-low cost."
+  },
+  {
+    "id": "grok-code-fast-1",
+    "name": "Grok Code Fast 1",
+    "provider": "xai",
+    "tier": "balanced",
+    "input_price": 0.20,
+    "output_price": 1.50,
+    "context_window": 256000,
+    "max_output": null,
+    "supports_vision": false,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2026-01",
+    "params": null,
+    "speed": "fast",
+    "description": "Code-specialized Grok."
+  },
+  {
+    "id": "grok-4",
+    "name": "Grok 4",
+    "provider": "xai",
+    "tier": "flagship",
+    "input_price": 3.00,
+    "output_price": 15.00,
+    "context_window": 256000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-09",
+    "params": null,
+    "speed": "medium",
+    "description": "Full Grok 4. Premium tier."
   },
   {
     "id": "grok-3",
@@ -263,6 +640,26 @@
     "supports_vision": true,
     "supports_tools": true,
     "reasoning": false,
-    "released": "2025-06"
+    "released": "2025-06",
+    "params": null,
+    "speed": "medium",
+    "description": "Previous gen Grok flagship."
+  },
+  {
+    "id": "grok-3-mini",
+    "name": "Grok 3 Mini",
+    "provider": "xai",
+    "tier": "budget",
+    "input_price": 0.30,
+    "output_price": 0.50,
+    "context_window": 131000,
+    "max_output": null,
+    "supports_vision": true,
+    "supports_tools": true,
+    "reasoning": false,
+    "released": "2025-06",
+    "params": null,
+    "speed": "fast",
+    "description": "Budget Grok 3."
   }
 ]

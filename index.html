@@ -152,14 +152,21 @@
                                 Context <span class="ml-1" x-text="sortIcon('context_window')"></span>
                             </th>
                             <th class="text-center px-4 py-3">Features</th>
+                            <th class="text-center px-4 py-3" @click="toggleSort('speed')">
+                                Speed <span class="ml-1" x-text="sortIcon('speed')"></span>
+                            </th>
+                            <th class="text-left px-4 py-3 hidden lg:table-cell">Info</th>
                         </tr>
                     </thead>
                     <tbody>
                         <template x-for="model in filteredModels" :key="model.id">
                             <tr class="border-t border-gray-800/50 hover:bg-gray-900/30 transition-all duration-200"
-                                :style="isHighlighted(model) ? 'opacity: 1' : 'opacity: 0.35'"
+                                :style="isHighlighted(model) ? 'opacity: 1' : 'opacity: 0.35'">
                                 <td class="px-4 py-3">
-                                    <span class="font-medium text-sm" x-text="model.name"></span>
+                                    <div>
+                                        <span class="font-medium text-sm" x-text="model.name"></span>
+                                        <span x-show="model.params" class="ml-1.5 text-[10px] text-gray-500 font-mono" x-text="model.params"></span>
+                                    </div>
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center gap-2">
@@ -189,6 +196,14 @@
                                         <span x-show="model.reasoning" class="feature-badge bg-rose-500/20 text-rose-400">Reasoning</span>
                                     </div>
                                     <span x-show="model.tier === 'attention'" class="feature-badge bg-pink-500/20 text-pink-400" x-text="model.platform_cut_pct + '% cut'"></span>
+                                </td>
+                                <td class="px-4 py-3 text-center">
+                                    <span x-show="model.speed" class="feature-badge"
+                                          :class="{'bg-green-500/20 text-green-400': model.speed === 'fast', 'bg-yellow-500/20 text-yellow-400': model.speed === 'medium', 'bg-red-500/20 text-red-400': model.speed === 'slow'}"
+                                          x-text="model.speed"></span>
+                                </td>
+                                <td class="px-4 py-3 hidden lg:table-cell">
+                                    <span class="text-xs text-gray-500" x-text="model.description || model.notes || ''"></span>
                                 </td>
                             </tr>
                         </template>
