@@ -95,6 +95,28 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
+        <!-- Cryptic signup banner -->
+        <div x-show="tab !== 'table' && !loading" x-cloak x-data="{ email: '', submitted: false }" class="mb-8">
+            <div x-show="!submitted" class="flex items-center gap-4 justify-between">
+                <p class="text-[11px] text-gray-600 font-mono leading-snug">
+                    <span x-show="tab === 'calculator'">When the three economies merge, which side will you be on?</span>
+                    <span x-show="tab === 'trends'">200 TKN/day for a bot. 15,000 for a human. The market won't care.</span>
+                    <span class="text-gray-700 block mt-0.5">The unit is coming.</span>
+                </p>
+                <div class="flex gap-2 flex-shrink-0">
+                    <input type="email" x-model="email" placeholder="your@email"
+                           class="w-40 bg-gray-900/50 border border-gray-800 rounded px-3 py-1 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
+                    <button @click="submitted = true"
+                            class="px-3 py-1 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
+                        signal
+                    </button>
+                </div>
+            </div>
+            <p x-show="submitted" x-cloak class="text-[11px] text-gray-600 font-mono">
+                Noted. You'll know when the unit is ready.
+            </p>
+        </div>
+
         <!-- Loading -->
         <div x-show="loading" class="flex items-center justify-center py-20">
             <div class="text-gray-400">Loading pricing data...</div>
@@ -319,24 +341,6 @@
                     </div>
                 </div>
 
-                <!-- Cryptic signup -->
-                <div class="mt-12 pt-8 border-t border-gray-800/30" x-data="{ email: '', submitted: false }">
-                    <div x-show="!submitted">
-                        <p class="text-xs text-gray-600 font-mono">When the three economies merge, which side will you be on?</p>
-                        <p class="text-[10px] text-gray-700 mt-1">The unit is coming. Be early.</p>
-                        <div class="flex gap-2 mt-3 max-w-sm">
-                            <input type="email" x-model="email" placeholder="your@email"
-                                   class="flex-1 bg-gray-900/50 border border-gray-800 rounded px-3 py-1.5 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
-                            <button @click="submitted = true"
-                                    class="px-3 py-1.5 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
-                                signal
-                            </button>
-                        </div>
-                    </div>
-                    <p x-show="submitted" x-cloak class="text-xs text-gray-600 font-mono">
-                        Noted. You'll know when the unit is ready.
-                    </p>
-                </div>
             </div>
         </div>
 
@@ -369,24 +373,6 @@
                     Showing flagship models only. More data points will appear as prices are tracked monthly.
                 </p>
 
-                <!-- Cryptic signup -->
-                <div class="mt-12 pt-8 border-t border-gray-800/30" x-data="{ email: '', submitted: false }">
-                    <div x-show="!submitted">
-                        <p class="text-xs text-gray-600 font-mono">200 TKN/day for a bot. 15,000 for a human. The market won't care which one is conscious.</p>
-                        <p class="text-[10px] text-gray-700 mt-1">We're building the unit. Get notified.</p>
-                        <div class="flex gap-2 mt-3 max-w-sm">
-                            <input type="email" x-model="email" placeholder="your@email"
-                                   class="flex-1 bg-gray-900/50 border border-gray-800 rounded px-3 py-1.5 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
-                            <button @click="submitted = true"
-                                    class="px-3 py-1.5 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
-                                signal
-                            </button>
-                        </div>
-                    </div>
-                    <p x-show="submitted" x-cloak class="text-xs text-gray-600 font-mono">
-                        Noted. You'll know when the unit is ready.
-                    </p>
-                </div>
             </div>
         </div>
 
