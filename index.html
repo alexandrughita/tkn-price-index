@@ -106,9 +106,9 @@
                 <div class="flex gap-2 flex-wrap">
                     <template x-for="provider in providers" :key="provider.id">
                         <button @click="toggleProvider(provider.id)"
-                                :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20' : 'border-opacity-30 bg-opacity-0 opacity-40'"
+                                :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20 ring-1 ring-white/20' : (highlightProvider ? 'border-opacity-30 bg-opacity-0 opacity-50' : 'border-opacity-50 bg-opacity-0')"
                                 :style="`border-color: ${provider.color}; background-color: ${provider.color}`"
-                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-all">
+                                class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-all cursor-pointer hover:opacity-100">
                             <span class="provider-dot" :style="`background-color: ${provider.color}`"></span>
                             <span x-text="provider.display_name"></span>
                         </button>
@@ -156,7 +156,8 @@
                     </thead>
                     <tbody>
                         <template x-for="model in filteredModels" :key="model.id">
-                            <tr class="border-t border-gray-800/50 hover:bg-gray-900/30 transition-colors">
+                            <tr class="border-t border-gray-800/50 hover:bg-gray-900/30 transition-all duration-200"
+                                :style="isHighlighted(model) ? 'opacity: 1' : 'opacity: 0.35'"
                                 <td class="px-4 py-3">
                                     <span class="font-medium text-sm" x-text="model.name"></span>
                                 </td>

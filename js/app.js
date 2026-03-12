@@ -7,7 +7,7 @@ document.addEventListener('alpine:init', () => {
         nsfwActive: false,
         sortBy: 'input_price',
         sortAsc: true,
-        filterProviders: [],
+        highlightProvider: null,
         filterTier: 'all',
         search: '',
         tab: 'table',
@@ -20,7 +20,6 @@ document.addEventListener('alpine:init', () => {
             ]);
             this.providers = providers;
             this.models = models;
-            this.filterProviders = providers.map(p => p.id);
             this.loading = false;
         },
 
@@ -38,7 +37,6 @@ document.addEventListener('alpine:init', () => {
                 this.nsfwProviders.forEach(p => {
                     if (!this.providers.find(ep => ep.id === p.id)) {
                         this.providers.push(p);
-                        this.filterProviders.push(p.id);
                     }
                 });
                 this.nsfwModels.forEach(m => {
@@ -61,7 +59,7 @@ document.addEventListener('alpine:init', () => {
                 const nsfwIds = this.nsfwProviders.map(p => p.id);
                 this.providers = this.providers.filter(p => !nsfwIds.includes(p.id));
                 this.models = this.models.filter(m => !nsfwIds.includes(m.provider));
-                this.filterProviders = this.filterProviders.filter(id => !nsfwIds.includes(id));
+                if (nsfwIds.includes(this.highlightProvider)) this.highlightProvider = null;
             }
         },
 
@@ -70,18 +68,31 @@ document.addEventListener('alpine:init', () => {
         },
 
         get filteredModels() {
-            return this.models
-                .filter(m => this.filterProviders.includes(m.provider))
+            let result = this.models
                 .filter(m => this.filterTier === 'all' || m.tier === this.filterTier)
-                .filter(m => !this.search || m.name.toLowerCase().includes(this.search.toLowerCase()))
-                .sort((a, b) => {
-                    const aVal = a[this.sortBy] ?? 0;
-                    const bVal = b[this.sortBy] ?? 0;
-                    if (typeof aVal === 'string') {
-                        return this.sortAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
-                    }
-                    return this.sortAsc ? aVal - bVal : bVal - aVal;
-                });
+                .filter(m => !this.search || m.name.toLowerCase().includes(this.search.toLowerCase()));
+
+            // Sort: highlighted provider first, then by sort column
+            const hp = this.highlightProvider;
+            result.sort((a, b) => {
+                if (hp) {
+                    const aH = a.provider === hp ? 0 : 1;
+                    const bH = b.provider === hp ? 0 : 1;
+                    if (aH !== bH) return aH - bH;
+                }
+                const aVal = a[this.sortBy] ?? 0;
+                const bVal = b[this.sortBy] ?? 0;
+                if (typeof aVal === 'string') {
+                    return this.sortAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                }
+                return this.sortAsc ? aVal - bVal : bVal - aVal;
+            });
+
+            return result;
+        },
+
+        isHighlighted(model) {
+            return !this.highlightProvider || model.provider === this.highlightProvider;
         },
 
         get minInput() {
@@ -104,16 +115,11 @@ document.addEventListener('alpine:init', () => {
         },
 
         toggleProvider(id) {
-            const idx = this.filterProviders.indexOf(id);
-            if (idx > -1) {
-                this.filterProviders.splice(idx, 1);
-            } else {
-                this.filterProviders.push(id);
-            }
+            this.highlightProvider = this.highlightProvider === id ? null : id;
         },
 
         isProviderActive(id) {
-            return this.filterProviders.includes(id);
+            return this.highlightProvider === id;
         },
 
         providerColor(id) {
