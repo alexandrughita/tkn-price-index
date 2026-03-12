@@ -1,0 +1,24 @@
+{
+  "snapshot_date": "2026-03-13",
+  "prices": [
+    { "model_id": "claude-opus-4-6", "input_price": 5.00, "output_price": 25.00 },
+    { "model_id": "claude-sonnet-4-6", "input_price": 3.00, "output_price": 15.00 },
+    { "model_id": "claude-haiku-4-5", "input_price": 1.00, "output_price": 5.00 },
+    { "model_id": "gpt-5.4", "input_price": 2.50, "output_price": 15.00 },
+    { "model_id": "gpt-5-mini", "input_price": 0.25, "output_price": 2.00 },
+    { "model_id": "gpt-5-nano", "input_price": 0.05, "output_price": 0.40 },
+    { "model_id": "gpt-4.1", "input_price": 2.00, "output_price": 8.00 },
+    { "model_id": "o3", "input_price": 2.00, "output_price": 8.00 },
+    { "model_id": "o4-mini", "input_price": 0.55, "output_price": 2.20 },
+    { "model_id": "gemini-3.1-pro", "input_price": 2.00, "output_price": 12.00 },
+    { "model_id": "gemini-2.5-pro", "input_price": 1.25, "output_price": 10.00 },
+    { "model_id": "gemini-2.5-flash", "input_price": 0.30, "output_price": 2.50 },
+    { "model_id": "gemini-2.5-flash-lite", "input_price": 0.10, "output_price": 0.40 },
+    { "model_id": "mistral-large-3", "input_price": 0.50, "output_price": 1.50 },
+    { "model_id": "mistral-small-3.1", "input_price": 0.10, "output_price": 0.30 },
+    { "model_id": "codestral", "input_price": 0.30, "output_price": 0.90 },
+    { "model_id": "grok-4.20-beta", "input_price": 2.00, "output_price": 6.00 },
+    { "model_id": "grok-4-fast", "input_price": 0.20, "output_price": 0.50 },
+    { "model_id": "grok-3", "input_price": 3.00, "output_price": 15.00 }
+  ]
+}

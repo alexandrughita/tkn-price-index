@@ -1,0 +1,57 @@
+[
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "display_name": "Claude",
+    "url": "https://anthropic.com",
+    "pricing_url": "https://anthropic.com/pricing",
+    "color": "#D97706",
+    "batch_discount": 0.5,
+    "has_caching": true,
+    "has_free_tier": false
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "display_name": "GPT",
+    "url": "https://openai.com",
+    "pricing_url": "https://openai.com/api/pricing",
+    "color": "#10A37F",
+    "batch_discount": 0.5,
+    "has_caching": true,
+    "has_free_tier": false
+  },
+  {
+    "id": "google",
+    "name": "Google",
+    "display_name": "Gemini",
+    "url": "https://ai.google.dev",
+    "pricing_url": "https://ai.google.dev/pricing",
+    "color": "#4285F4",
+    "batch_discount": 0.5,
+    "has_caching": true,
+    "has_free_tier": true
+  },
+  {
+    "id": "mistral",
+    "name": "Mistral AI",
+    "display_name": "Mistral",
+    "url": "https://mistral.ai",
+    "pricing_url": "https://mistral.ai/pricing",
+    "color": "#FF7000",
+    "batch_discount": null,
+    "has_caching": false,
+    "has_free_tier": false
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "display_name": "Grok",
+    "url": "https://x.ai",
+    "pricing_url": "https://docs.x.ai/docs/models",
+    "color": "#9333EA",
+    "batch_discount": null,
+    "has_caching": true,
+    "has_free_tier": false
+  }
+]

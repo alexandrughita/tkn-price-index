@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Provider dot */
+.provider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Table */
+.price-table th {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.price-table th:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.price-table td {
+    white-space: nowrap;
+}
+
+/* Cheapest highlight */
+.cheapest-cell {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4B5563;
+}
+
+/* Range slider */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #374151;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #22c55e;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #22c55e;
+    cursor: pointer;
+    border: none;
+}
+
+/* Tab active */
+.tab-active {
+    border-bottom-color: #22c55e;
+    color: #22c55e;
+}
+
+/* Calculator bar */
+.calc-bar {
+    transition: width 0.3s ease;
+}
+
+/* Feature badge */
+.feature-badge {
+    font-size: 0.65rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Pulse animation for cheapest */
+@keyframes subtle-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
