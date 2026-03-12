@@ -12,6 +12,14 @@ document.addEventListener('alpine:init', () => {
         search: '',
         tab: 'table',
         loading: true,
+        currency: 'USD',
+        currencyRate: 1,
+        currencies: [
+            { id: 'USD', symbol: '$', rate: 1 },
+            { id: 'EUR', symbol: '\u20AC', rate: 0.92 },
+            { id: 'GBP', symbol: '\u00A3', rate: 0.79 },
+            { id: 'BTC', symbol: '\u20BF', rate: null }
+        ],
 
         async init() {
             const [providers, models] = await Promise.all([
@@ -22,6 +30,32 @@ document.addEventListener('alpine:init', () => {
             this.models = models;
             this.loading = false;
             this.syncSharedData();
+            this.fetchBtcRate();
+        },
+
+        async fetchBtcRate() {
+            try {
+                const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
+                const data = await res.json();
+                const btcUsd = data.bpi.USD.rate_float;
+                const btc = this.currencies.find(c => c.id === 'BTC');
+                if (btc) btc.rate = 1 / btcUsd;
+            } catch (e) {
+                const btc = this.currencies.find(c => c.id === 'BTC');
+                if (btc) btc.rate = 1 / 85000;
+            }
+        },
+
+        setCurrency(id) {
+            this.currency = id;
+            const c = this.currencies.find(c => c.id === id);
+            this.currencyRate = c?.rate || 1;
+            window._tknCurrency = { id, rate: this.currencyRate, symbol: c?.symbol || '$' };
+            window.dispatchEvent(new CustomEvent('tkn-currency-changed'));
+        },
+
+        get currencySymbol() {
+            return this.currencies.find(c => c.id === this.currency)?.symbol || '$';
         },
 
         syncSharedData() {
@@ -150,8 +184,13 @@ document.addEventListener('alpine:init', () => {
 
         formatPrice(price) {
             if (price === null || price === undefined) return '\u2014';
-            if (price < 0.10) return '$' + price.toFixed(3);
-            return '$' + price.toFixed(2);
+            const converted = price * this.currencyRate;
+            const sym = this.currencySymbol;
+            if (this.currency === 'BTC') {
+                return sym + converted.toFixed(8);
+            }
+            if (converted < 0.10) return sym + converted.toFixed(3);
+            return sym + converted.toFixed(2);
         },
 
         formatContext(tokens) {

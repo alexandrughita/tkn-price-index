@@ -62,23 +62,33 @@
                 </div>
             </div>
 
-            <!-- Tabs -->
-            <nav class="flex gap-6 mt-6 border-b border-gray-800 -mb-px">
-                <button @click="tab = 'table'"
-                        :class="tab === 'table' ? 'tab-active' : 'text-gray-400 border-transparent'"
-                        class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
-                    Compare
-                </button>
-                <button @click="tab = 'calculator'"
-                        :class="tab === 'calculator' ? 'tab-active' : 'text-gray-400 border-transparent'"
-                        class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
-                    Calculator
-                </button>
-                <button @click="tab = 'trends'"
-                        :class="tab === 'trends' ? 'tab-active' : 'text-gray-400 border-transparent'"
-                        class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
-                    Trends
-                </button>
+            <!-- Tabs + Currency -->
+            <nav class="flex items-center mt-6 border-b border-gray-800 -mb-px">
+                <div class="flex gap-6">
+                    <button @click="tab = 'table'"
+                            :class="tab === 'table' ? 'tab-active' : 'text-gray-400 border-transparent'"
+                            class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
+                        Compare
+                    </button>
+                    <button @click="tab = 'calculator'"
+                            :class="tab === 'calculator' ? 'tab-active' : 'text-gray-400 border-transparent'"
+                            class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
+                        Calculator
+                    </button>
+                    <button @click="tab = 'trends'"
+                            :class="tab === 'trends' ? 'tab-active' : 'text-gray-400 border-transparent'"
+                            class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
+                        Trends
+                    </button>
+                </div>
+                <div class="ml-auto flex items-center gap-1 pb-3">
+                    <template x-for="c in currencies" :key="c.id">
+                        <button @click="setCurrency(c.id)"
+                                :class="currency === c.id ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'"
+                                class="px-2 py-1 rounded text-[11px] font-mono font-medium transition-colors"
+                                x-text="c.symbol"></button>
+                    </template>
+                </div>
             </nav>
         </div>
     </header>
@@ -139,11 +149,11 @@
                                 Tier <span class="ml-1" x-text="sortIcon('tier')"></span>
                             </th>
                             <th class="text-right px-4 py-3" @click="toggleSort('input_price')">
-                                <span x-text="nsfwActive ? 'Buy $/1M' : 'Input $/1M'"></span>
+                                <span x-text="(nsfwActive ? 'Buy ' : 'Input ') + currencySymbol + '/1M'"></span>
                                 <span class="ml-1" x-text="sortIcon('input_price')"></span>
                             </th>
                             <th class="text-right px-4 py-3" @click="toggleSort('output_price')">
-                                <span x-text="nsfwActive ? 'Payout $/1M' : 'Output $/1M'"></span>
+                                <span x-text="(nsfwActive ? 'Payout ' : 'Output ') + currencySymbol + '/1M'"></span>
                                 <span class="ml-1" x-text="sortIcon('output_price')"></span>
                             </th>
                             <th class="text-right px-4 py-3" @click="toggleSort('context_window')">
@@ -264,7 +274,7 @@
                             <div class="text-right w-28 flex-shrink-0">
                                 <span class="font-mono text-sm font-semibold"
                                       :class="i === 0 ? 'text-tkn-400' : 'text-gray-300'"
-                                      x-text="'$' + r.monthlyCost.toFixed(2)"></span>
+                                      x-text="formatCost(r.monthlyCost)"></span>
                                 <span class="text-xs text-gray-500">/mo</span>
                             </div>
 
@@ -280,9 +290,9 @@
                 <div x-show="results.length > 1" class="mt-6 p-4 rounded-lg bg-tkn-500/5 border border-tkn-500/20">
                     <p class="text-sm text-gray-300">
                         Cheapest: <strong class="text-tkn-400" x-text="results[0]?.name"></strong> at
-                        <strong class="text-tkn-400 font-mono" x-text="'$' + (results[0]?.monthlyCost || 0).toFixed(2)"></strong>/mo.
+                        <strong class="text-tkn-400 font-mono" x-text="formatCost(results[0]?.monthlyCost || 0)"></strong>/mo.
                         You'd save
-                        <strong class="text-tkn-400 font-mono" x-text="'$' + (results[results.length-1]?.monthlyCost - results[0]?.monthlyCost).toFixed(2)"></strong>/mo
+                        <strong class="text-tkn-400 font-mono" x-text="formatCost(results[results.length-1]?.monthlyCost - results[0]?.monthlyCost)"></strong>/mo
                         vs <span x-text="results[results.length-1]?.name"></span>.
                     </p>
                 </div>
@@ -297,11 +307,11 @@
                                 <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${providerColor(a.provider)}`"></span>
                                 <span class="text-sm font-medium w-40 truncate" x-text="a.name"></span>
                                 <div class="flex-1 text-right">
-                                    <span class="font-mono text-sm text-pink-400" x-text="'$' + a.totalCost.toLocaleString(undefined, {maximumFractionDigits: 0})"></span>
+                                    <span class="font-mono text-sm text-pink-400" x-text="formatCost(a.totalCost)"></span>
                                     <span class="text-xs text-gray-500"> buy</span>
                                 </div>
                                 <div class="text-right w-32">
-                                    <span class="font-mono text-sm text-gray-400" x-text="'$' + a.performerEarns.toLocaleString(undefined, {maximumFractionDigits: 0})"></span>
+                                    <span class="font-mono text-sm text-gray-400" x-text="formatCost(a.performerEarns)"></span>
                                     <span class="text-xs text-gray-500"> to performer</span>
                                 </div>
                             </div>

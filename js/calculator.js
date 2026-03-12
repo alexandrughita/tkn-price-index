@@ -6,11 +6,15 @@ document.addEventListener('alpine:init', () => {
         outputTokens: 500000,
         inputSlider: 60,
         outputSlider: 57,
+        currencyRate: 1,
+        currencySymbol: '$',
+        currencyId: 'USD',
 
         init() {
-            // Sync from parent data
             this.syncFromParent();
+            this.syncCurrency();
             window.addEventListener('tkn-data-changed', () => this.syncFromParent());
+            window.addEventListener('tkn-currency-changed', () => this.syncCurrency());
 
             this.$watch('inputSlider', val => {
                 this.inputTokens = this.sliderToTokens(val);
@@ -23,6 +27,21 @@ document.addEventListener('alpine:init', () => {
         syncFromParent() {
             if (window._tknModels) this.models = [...window._tknModels];
             if (window._tknProviders) this.providers = [...window._tknProviders];
+        },
+
+        syncCurrency() {
+            const c = window._tknCurrency;
+            if (c) {
+                this.currencyRate = c.rate;
+                this.currencySymbol = c.symbol;
+                this.currencyId = c.id;
+            }
+        },
+
+        formatCost(usd) {
+            const val = usd * this.currencyRate;
+            if (this.currencyId === 'BTC') return this.currencySymbol + val.toFixed(6);
+            return this.currencySymbol + val.toFixed(2);
         },
 
         sliderToTokens(val) {
