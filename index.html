@@ -46,8 +46,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl sm:text-3xl font-bold">
+                    <h1 class="text-2xl sm:text-3xl font-bold flex items-center gap-2">
                         <span class="text-tkn-500">TKN</span> Price Index
+                        <button @click="toggleNsfw()"
+                                :class="nsfwActive ? 'bg-pink-500/30 border-pink-500/60 text-pink-400' : 'bg-gray-800/50 border-gray-700/50 text-gray-600 hover:text-gray-400 hover:border-gray-600'"
+                                class="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-all cursor-pointer leading-tight"
+                                title="Toggle attention economy tokens">18+</button>
                     </h1>
                     <p class="text-gray-400 mt-1 text-sm sm:text-base">The cost of intelligence, tracked.</p>
                 </div>
@@ -118,6 +122,7 @@
                     <option value="flagship">Flagship</option>
                     <option value="balanced">Balanced</option>
                     <option value="budget">Budget</option>
+                    <option x-show="nsfwActive" value="attention">Attention</option>
                 </select>
             </div>
 
@@ -136,10 +141,12 @@
                                 Tier <span class="ml-1" x-text="sortIcon('tier')"></span>
                             </th>
                             <th class="text-right px-4 py-3" @click="toggleSort('input_price')">
-                                Input $/1M <span class="ml-1" x-text="sortIcon('input_price')"></span>
+                                <span x-text="nsfwActive ? 'Buy $/1M' : 'Input $/1M'"></span>
+                                <span class="ml-1" x-text="sortIcon('input_price')"></span>
                             </th>
                             <th class="text-right px-4 py-3" @click="toggleSort('output_price')">
-                                Output $/1M <span class="ml-1" x-text="sortIcon('output_price')"></span>
+                                <span x-text="nsfwActive ? 'Payout $/1M' : 'Output $/1M'"></span>
+                                <span class="ml-1" x-text="sortIcon('output_price')"></span>
                             </th>
                             <th class="text-right px-4 py-3" @click="toggleSort('context_window')">
                                 Context <span class="ml-1" x-text="sortIcon('context_window')"></span>
@@ -171,13 +178,21 @@
                                     <span x-text="formatPrice(model.output_price)"></span>
                                 </td>
                                 <td class="px-4 py-3 text-right font-mono text-sm text-gray-300">
-                                    <span x-text="formatContext(model.context_window)"></span>
+                                    <span x-show="model.tier !== 'attention'" x-text="formatContext(model.context_window)"></span>
+                                    <span x-show="model.tier === 'attention'" class="text-pink-400/60 text-xs">&infin;</span>
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     <div class="flex items-center justify-center gap-1.5">
-                                        <span x-show="model.supports_vision" class="feature-badge bg-purple-500/20 text-purple-400">Vision</span>
-                                        <span x-show="model.supports_tools" class="feature-badge bg-cyan-500/20 text-cyan-400">Tools</span>
-                                        <span x-show="model.reasoning" class="feature-badge bg-rose-500/20 text-rose-400">Reasoning</span>
+                                        <template x-if="model.tier !== 'attention'">
+                                            <div class="flex items-center gap-1.5">
+                                                <span x-show="model.supports_vision" class="feature-badge bg-purple-500/20 text-purple-400">Vision</span>
+                                                <span x-show="model.supports_tools" class="feature-badge bg-cyan-500/20 text-cyan-400">Tools</span>
+                                                <span x-show="model.reasoning" class="feature-badge bg-rose-500/20 text-rose-400">Reasoning</span>
+                                            </div>
+                                        </template>
+                                        <template x-if="model.tier === 'attention'">
+                                            <span class="feature-badge bg-pink-500/20 text-pink-400" x-text="model.platform_cut_pct + '% cut'"></span>
+                                        </template>
                                     </div>
                                 </td>
                             </tr>
@@ -189,6 +204,10 @@
             <p class="text-xs text-gray-600 mt-4">
                 Prices per 1M tokens. Source: official provider pricing pages.
                 <span class="text-tkn-500/50 cheapest-cell">Green</span> = cheapest in current view.
+            </p>
+            <p x-show="nsfwActive" x-cloak class="text-xs text-pink-400/50 mt-2">
+                Attention economy tokens normalized to $/1M for comparison.
+                Input = buy price. Output = performer payout. A token of attention costs more than a token of intelligence.
             </p>
         </div>
 

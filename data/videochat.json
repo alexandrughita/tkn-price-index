@@ -1,0 +1,130 @@
+{
+  "providers": [
+    {
+      "id": "chaturbate",
+      "name": "Chaturbate",
+      "display_name": "Chaturbate",
+      "url": "https://chaturbate.com",
+      "pricing_url": null,
+      "color": "#F97316"
+    },
+    {
+      "id": "livejasmin",
+      "name": "LiveJasmin",
+      "display_name": "LiveJasmin",
+      "url": "https://livejasmin.com",
+      "pricing_url": null,
+      "color": "#EC4899"
+    },
+    {
+      "id": "stripchat",
+      "name": "Stripchat",
+      "display_name": "Stripchat",
+      "url": "https://stripchat.com",
+      "pricing_url": null,
+      "color": "#A855F7"
+    },
+    {
+      "id": "bongacams",
+      "name": "BongaCams",
+      "display_name": "BongaCams",
+      "url": "https://bongacams.com",
+      "pricing_url": null,
+      "color": "#EF4444"
+    },
+    {
+      "id": "myfreecams",
+      "name": "MyFreeCams",
+      "display_name": "MyFreeCams",
+      "url": "https://myfreecams.com",
+      "pricing_url": null,
+      "color": "#F472B6"
+    }
+  ],
+  "models": [
+    {
+      "id": "chaturbate-token",
+      "name": "Chaturbate Token",
+      "provider": "chaturbate",
+      "tier": "attention",
+      "buy_price_per_token": 0.11,
+      "payout_per_token": 0.05,
+      "platform_cut_pct": 55,
+      "min_purchase": 100,
+      "min_payout_usd": 50,
+      "notes": "Bulk discount: $0.08/tk at 2025+ tokens"
+    },
+    {
+      "id": "chaturbate-token-bulk",
+      "name": "Chaturbate Token (Bulk)",
+      "provider": "chaturbate",
+      "tier": "attention",
+      "buy_price_per_token": 0.08,
+      "payout_per_token": 0.05,
+      "platform_cut_pct": 38,
+      "min_purchase": 2025,
+      "min_payout_usd": 50,
+      "notes": "Best rate: 2025+ token package"
+    },
+    {
+      "id": "livejasmin-credit",
+      "name": "LiveJasmin Credit",
+      "provider": "livejasmin",
+      "tier": "attention",
+      "buy_price_per_token": 1.00,
+      "payout_per_token": 0.40,
+      "platform_cut_pct": 60,
+      "min_purchase": 28,
+      "min_payout_usd": 5,
+      "notes": "Credits, not tokens. 1 credit = ~1 min private show"
+    },
+    {
+      "id": "livejasmin-credit-bulk",
+      "name": "LiveJasmin Credit (Bulk)",
+      "provider": "livejasmin",
+      "tier": "attention",
+      "buy_price_per_token": 0.70,
+      "payout_per_token": 0.40,
+      "platform_cut_pct": 43,
+      "min_purchase": 178,
+      "min_payout_usd": 5,
+      "notes": "Best rate: 178+ credit package"
+    },
+    {
+      "id": "stripchat-token",
+      "name": "Stripchat Token",
+      "provider": "stripchat",
+      "tier": "attention",
+      "buy_price_per_token": 0.11,
+      "payout_per_token": 0.05,
+      "platform_cut_pct": 55,
+      "min_purchase": 90,
+      "min_payout_usd": 50,
+      "notes": "Similar pricing structure to Chaturbate"
+    },
+    {
+      "id": "bongacams-token",
+      "name": "BongaCams Token",
+      "provider": "bongacams",
+      "tier": "attention",
+      "buy_price_per_token": 0.075,
+      "payout_per_token": 0.05,
+      "platform_cut_pct": 33,
+      "min_purchase": 90,
+      "min_payout_usd": 50,
+      "notes": "Lower platform cut than competitors"
+    },
+    {
+      "id": "myfreecams-token",
+      "name": "MyFreeCams Token",
+      "provider": "myfreecams",
+      "tier": "attention",
+      "buy_price_per_token": 0.10,
+      "payout_per_token": 0.05,
+      "platform_cut_pct": 50,
+      "min_purchase": 200,
+      "min_payout_usd": 20,
+      "notes": "Classic token model, 50/50 split"
+    }
+  ]
+}
