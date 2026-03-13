@@ -1,0 +1,40 @@
+name: Scrape AI Pricing
+
+on:
+  schedule:
+    # Twice a week: Monday and Thursday at 08:00 UTC
+    - cron: '0 8 * * 1,4'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run AI price scraper
+        id: scrape
+        run: node scripts/scrape-ai-prices.js
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet data/ && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "TKN Price Bot"
+          git config user.email "bot@tkn.dev"
+          git add data/models.json data/history/
+          git commit -m "chore: update AI model pricing $(date +%Y-%m-%d)"
+          git push

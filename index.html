@@ -95,34 +95,6 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- Cryptic signup banner -->
-        <div x-show="tab !== 'table' && !loading" x-cloak x-data="{ email: '', submitted: false }" class="mb-8">
-            <div x-show="!submitted" class="flex items-center gap-4 justify-between">
-                <p class="text-[11px] text-gray-600 font-mono leading-snug">
-                    <span x-show="tab === 'calculator'">When the three economies merge, which side will you be on?</span>
-                    <span x-show="tab === 'trends'">The price of a thought is falling. The price of a glance is not.</span>
-                    <span class="text-gray-700 block mt-0.5">The unit is coming.</span>
-                </p>
-                <div class="flex items-center gap-4 flex-shrink-0">
-                    <p class="text-[11px] text-gray-700 font-mono leading-snug text-right hidden sm:block">
-                        200 TKN/day for a bot. 15,000 for a human.<br>
-                        <span class="text-gray-600">The market won't care.</span>
-                    </p>
-                    <div class="flex gap-2">
-                        <input type="email" x-model="email" placeholder="your@email"
-                               class="w-40 bg-gray-900/50 border border-gray-800 rounded px-3 py-1 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
-                        <button @click="submitted = true"
-                                class="px-3 py-1 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
-                            signal
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <p x-show="submitted" x-cloak class="text-[11px] text-gray-600 font-mono">
-                Noted. You'll know when the unit is ready.
-            </p>
-        </div>
-
         <!-- Loading -->
         <div x-show="loading" class="flex items-center justify-center py-20">
             <div class="text-gray-400">Loading pricing data...</div>
@@ -253,7 +225,20 @@
 
             <div>
                 <h2 class="text-xl font-semibold mb-6">Cost Calculator</h2>
-                <p class="text-gray-400 text-sm mb-8">Estimate your monthly cost per model based on usage.</p>
+                <p class="text-gray-400 text-sm mb-6">Estimate your monthly cost per model based on usage.</p>
+
+                <!-- Provider pills -->
+                <div class="flex items-center gap-2 mb-8 flex-wrap">
+                    <template x-for="provider in providers" :key="provider.id">
+                        <button @click="toggleProvider(provider.id)"
+                                :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20 ring-1 ring-white/20' : (highlightProvider ? 'border-opacity-30 bg-opacity-0 opacity-50' : 'border-opacity-50 bg-opacity-0')"
+                                :style="`border-color: ${provider.color}; background-color: ${provider.color}`"
+                                class="flex items-center gap-1 px-2 py-1 rounded-full border text-[11px] font-medium transition-all cursor-pointer hover:opacity-100">
+                            <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${provider.color}`"></span>
+                            <span x-text="provider.display_name"></span>
+                        </button>
+                    </template>
+                </div>
 
                 <!-- Inputs -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
@@ -280,8 +265,9 @@
                 <!-- Results -->
                 <div class="space-y-2">
                     <template x-for="(r, i) in results" :key="r.id">
-                        <div class="flex items-center gap-4 py-2.5 px-4 rounded-lg"
-                             :class="i === 0 ? 'bg-tkn-500/10 border border-tkn-500/30' : 'bg-gray-900/30'">
+                        <div class="flex items-center gap-4 py-2.5 px-4 rounded-lg transition-all duration-200"
+                             :class="i === 0 ? 'bg-tkn-500/10 border border-tkn-500/30' : 'bg-gray-900/30'"
+                             :style="!highlightProvider || r.provider === highlightProvider ? 'opacity: 1' : 'opacity: 0.35'">
                             <!-- Rank -->
                             <span class="text-xs font-mono w-6 text-gray-500" x-text="'#' + (i + 1)"></span>
 
@@ -353,7 +339,7 @@
         <!-- ==================== TRENDS TAB ==================== -->
         <div x-show="tab === 'trends'" x-cloak x-data="trends">
 
-            <div class="max-w-4xl">
+            <div>
                 <h2 class="text-xl font-semibold mb-2">Price Trends</h2>
                 <p class="text-gray-400 text-sm mb-6">Flagship model price comparison. Tracking since March 2026.</p>
 
@@ -384,8 +370,35 @@
 
     </main>
 
+    <!-- Cryptic signup banner -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16" x-data="{ email: '', submitted: false }">
+        <div x-show="!submitted" class="flex items-center gap-4 justify-between py-6 border-t border-gray-800/50">
+            <p class="text-[11px] text-gray-600 font-mono leading-snug">
+                When the three economies merge, which side will you be on?
+                <span class="text-gray-700 block mt-0.5">The unit is coming.</span>
+            </p>
+            <div class="flex items-center gap-4 flex-shrink-0">
+                <p class="text-[11px] text-gray-700 font-mono leading-snug text-right hidden sm:block">
+                    200 TKN/day for a bot. 15,000 for a human.<br>
+                    <span class="text-gray-600">The market won't care.</span>
+                </p>
+                <div class="flex gap-2">
+                    <input type="email" x-model="email" placeholder="your@email"
+                           class="w-40 bg-gray-900/50 border border-gray-800 rounded px-3 py-1 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
+                    <button @click="submitted = true"
+                            class="px-3 py-1 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
+                        signal
+                    </button>
+                </div>
+            </div>
+        </div>
+        <p x-show="submitted" x-cloak class="text-[11px] text-gray-600 font-mono py-6 border-t border-gray-800/50">
+            Noted. You'll know when the unit is ready.
+        </p>
+    </div>
+
     <!-- Footer -->
-    <footer class="border-t border-gray-800 mt-16">
+    <footer class="border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>

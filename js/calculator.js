@@ -2,6 +2,7 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('calculator', () => ({
         models: [],
         providers: [],
+        highlightProvider: null,
         inputTokens: 1000000,
         outputTokens: 500000,
         inputSlider: 60,
@@ -56,6 +57,14 @@ document.addEventListener('alpine:init', () => {
             return n.toString();
         },
 
+        toggleProvider(id) {
+            this.highlightProvider = this.highlightProvider === id ? null : id;
+        },
+
+        isProviderActive(id) {
+            return this.highlightProvider === id;
+        },
+
         providerColor(id) {
             return this.providers.find(p => p.id === id)?.color || '#666';
         },
@@ -66,11 +75,19 @@ document.addEventListener('alpine:init', () => {
             // Filter out attention-tier models from cost calc (different unit)
             const aiModels = this.models.filter(m => m.tier !== 'attention');
 
+            const hp = this.highlightProvider;
             const results = aiModels.map(m => {
                 const monthlyCost = (this.inputTokens / 1000000) * m.input_price +
                                     (this.outputTokens / 1000000) * m.output_price;
                 return { ...m, monthlyCost };
-            }).sort((a, b) => a.monthlyCost - b.monthlyCost);
+            }).sort((a, b) => {
+                if (hp) {
+                    const aH = a.provider === hp ? 0 : 1;
+                    const bH = b.provider === hp ? 0 : 1;
+                    if (aH !== bH) return aH - bH;
+                }
+                return a.monthlyCost - b.monthlyCost;
+            });
 
             const maxCost = results[results.length - 1]?.monthlyCost || 1;
 
