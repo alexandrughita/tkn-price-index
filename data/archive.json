@@ -1,0 +1,99 @@
+{
+  "series": [
+    {
+      "provider": "openai",
+      "label": "OpenAI (flagship)",
+      "color": "#10A37F",
+      "points": [
+        { "date": "2020-06", "price": 60.00, "model": "GPT-3 Davinci" },
+        { "date": "2022-01", "price": 60.00, "model": "GPT-3 Davinci" },
+        { "date": "2023-03", "price": 30.00, "model": "GPT-4" },
+        { "date": "2023-06", "price": 30.00, "model": "GPT-4" },
+        { "date": "2023-11", "price": 10.00, "model": "GPT-4 Turbo" },
+        { "date": "2024-05", "price": 5.00, "model": "GPT-4o" },
+        { "date": "2024-09", "price": 2.50, "model": "GPT-4o" },
+        { "date": "2025-04", "price": 2.00, "model": "GPT-4.1" },
+        { "date": "2025-11", "price": 1.75, "model": "GPT-5.2" },
+        { "date": "2026-01", "price": 2.50, "model": "GPT-5.4" }
+      ]
+    },
+    {
+      "provider": "openai-budget",
+      "label": "OpenAI (budget)",
+      "color": "#10A37F50",
+      "points": [
+        { "date": "2023-03", "price": 2.00, "model": "GPT-3.5 Turbo" },
+        { "date": "2023-06", "price": 1.50, "model": "GPT-3.5 Turbo" },
+        { "date": "2023-11", "price": 1.00, "model": "GPT-3.5 Turbo" },
+        { "date": "2024-07", "price": 0.15, "model": "GPT-4o Mini" },
+        { "date": "2025-04", "price": 0.10, "model": "GPT-4.1 Nano" },
+        { "date": "2025-12", "price": 0.05, "model": "GPT-5 Nano" }
+      ]
+    },
+    {
+      "provider": "anthropic",
+      "label": "Anthropic (flagship)",
+      "color": "#D97706",
+      "points": [
+        { "date": "2023-03", "price": 11.02, "model": "Claude 1" },
+        { "date": "2023-07", "price": 8.00, "model": "Claude 2" },
+        { "date": "2024-03", "price": 15.00, "model": "Claude 3 Opus" },
+        { "date": "2025-07", "price": 15.00, "model": "Claude Opus 4.1" },
+        { "date": "2026-02", "price": 5.00, "model": "Claude Opus 4.6" }
+      ]
+    },
+    {
+      "provider": "anthropic-budget",
+      "label": "Anthropic (budget)",
+      "color": "#D9770650",
+      "points": [
+        { "date": "2024-03", "price": 0.25, "model": "Claude 3 Haiku" },
+        { "date": "2025-10", "price": 1.00, "model": "Claude Haiku 4.5" }
+      ]
+    },
+    {
+      "provider": "google",
+      "label": "Google (flagship)",
+      "color": "#4285F4",
+      "points": [
+        { "date": "2023-12", "price": 0.50, "model": "Gemini 1.0 Pro" },
+        { "date": "2024-05", "price": 3.50, "model": "Gemini 1.5 Pro" },
+        { "date": "2024-10", "price": 1.25, "model": "Gemini 1.5 Pro" },
+        { "date": "2025-06", "price": 1.25, "model": "Gemini 2.5 Pro" },
+        { "date": "2026-02", "price": 2.00, "model": "Gemini 3.1 Pro" }
+      ]
+    },
+    {
+      "provider": "google-budget",
+      "label": "Google (budget)",
+      "color": "#4285F450",
+      "points": [
+        { "date": "2024-05", "price": 0.35, "model": "Gemini 1.5 Flash" },
+        { "date": "2024-10", "price": 0.075, "model": "Gemini 1.5 Flash" },
+        { "date": "2025-09", "price": 0.10, "model": "Gemini 2.5 Flash-Lite" },
+        { "date": "2026-02", "price": 0.25, "model": "Gemini 3.1 Flash-Lite" }
+      ]
+    },
+    {
+      "provider": "mistral",
+      "label": "Mistral (flagship)",
+      "color": "#FF7000",
+      "points": [
+        { "date": "2024-02", "price": 8.00, "model": "Mistral Large" },
+        { "date": "2024-07", "price": 3.00, "model": "Mistral Large 2" },
+        { "date": "2025-12", "price": 0.50, "model": "Mistral Large 3" }
+      ]
+    },
+    {
+      "provider": "xai",
+      "label": "xAI (flagship)",
+      "color": "#9333EA",
+      "points": [
+        { "date": "2025-02", "price": 5.00, "model": "Grok 2" },
+        { "date": "2025-06", "price": 3.00, "model": "Grok 3" },
+        { "date": "2025-09", "price": 3.00, "model": "Grok 4" },
+        { "date": "2026-02", "price": 2.00, "model": "Grok 4.20 Beta" }
+      ]
+    }
+  ]
+}

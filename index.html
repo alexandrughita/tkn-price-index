@@ -77,6 +77,11 @@
                             class="pb-3 border-b-2 text-sm transition-colors hover:text-gray-300">
                         Trends
                     </button>
+                    <button @click="tab = 'archive'"
+                            :class="tab === 'archive' ? 'tab-active' : 'text-gray-500 border-transparent'"
+                            class="pb-3 border-b-2 text-sm transition-colors hover:text-gray-300">
+                        Archive
+                    </button>
                 </div>
                 <div class="ml-auto flex items-center gap-1 pb-3">
                     <template x-for="c in currencies" :key="c.id">
@@ -354,6 +359,30 @@
             </div>
         </div>
 
+        <!-- ==================== ARCHIVE TAB ==================== -->
+        <div x-show="tab === 'archive'" x-cloak x-data="archive">
+
+            <div>
+                <h2 class="text-lg font-medium mb-1">Price Archive</h2>
+                <p class="text-gray-500 text-sm mb-6">Flagship input prices since GPT-3. Six years of deflation.</p>
+
+                <div class="flex items-center gap-4 mb-6">
+                    <label class="flex items-center gap-2 text-sm text-gray-500 cursor-pointer">
+                        <input type="checkbox" x-model="showBudget" class="accent-gray-600">
+                        Show budget tiers
+                    </label>
+                </div>
+
+                <div class="border border-gray-800/60 p-6" style="height: 480px;">
+                    <canvas id="archiveChart"></canvas>
+                </div>
+
+                <p class="text-xs text-gray-600 mt-4">
+                    Input price per 1M tokens, log scale. Step lines – price holds until next model release.
+                </p>
+            </div>
+        </div>
+
     </main>
 
     <!-- Cryptic signup banner -->
@@ -416,5 +445,6 @@
     <script src="js/app.js"></script>
     <script src="js/calculator.js"></script>
     <script src="js/charts.js"></script>
+    <script src="js/archive.js"></script>
 </body>
 </html>
