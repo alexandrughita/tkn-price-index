@@ -52,9 +52,9 @@ document.addEventListener('alpine:init', () => {
                         data: entries.map(f => f[priceKey]),
                         backgroundColor: entries.map(f => f.color + '99'),
                         borderColor: entries.map(f => f.color),
-                        borderWidth: 2,
-                        borderRadius: 6,
-                        barPercentage: 0.6
+                        borderWidth: 1,
+                        borderRadius: 0,
+                        barPercentage: 0.5
                     }]
                 },
                 options: {
@@ -84,7 +84,7 @@ document.addEventListener('alpine:init', () => {
                                 },
                                 font: { family: 'JetBrains Mono, monospace', size: 12 }
                             },
-                            grid: { color: '#1F2937' },
+                            grid: { color: '#111827' },
                             title: {
                                 display: true,
                                 text: 'Price per 1M tokens (log scale)',

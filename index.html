@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TKN Price Index — AI Compute Cost Benchmark</title>
+    <title>TKN Price Index – AI Compute Cost Benchmark</title>
     <meta name="description" content="Compare LLM API prices across Claude, GPT, Gemini, Mistral, and Grok. Real-time pricing data, cost calculator, and historical trends. Free and open source.">
 
-    <meta property="og:title" content="TKN Price Index — AI Compute Cost Benchmark">
+    <meta property="og:title" content="TKN Price Index – AI Compute Cost Benchmark">
     <meta property="og:description" content="Compare LLM API prices across all major providers. Free, open source, updated weekly.">
     <meta property="og:type" content="website">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="TKN Price Index — AI Compute Cost Benchmark">
+    <meta name="twitter:title" content="TKN Price Index – AI Compute Cost Benchmark">
     <meta name="twitter:description" content="Compare LLM API prices across all major providers.">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,51 +41,48 @@
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen" x-data="priceIndex">
 
-    <!-- Header -->
-    <header class="border-b border-gray-800">
+    <header class="border-b border-gray-800/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="text-2xl sm:text-3xl font-bold flex items-center gap-2">
                         <span class="text-tkn-500">TKN</span> Price Index
                         <button @click="toggleNsfw()"
-                                :class="nsfwActive ? 'bg-pink-500/30 border-pink-500/60 text-pink-400' : 'bg-gray-800/50 border-gray-700/50 text-gray-600 hover:text-gray-400 hover:border-gray-600'"
-                                class="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-all cursor-pointer leading-tight"
+                                :class="nsfwActive ? 'bg-pink-500/20 border-pink-500/40 text-pink-400' : 'border-gray-700/40 text-gray-600 hover:text-gray-400'"
+                                class="text-[10px] font-mono px-1.5 py-0.5 border transition-colors cursor-pointer leading-tight"
                                 title="Toggle attention economy tokens">18+</button>
                     </h1>
-                    <p class="text-gray-400 mt-1 text-sm sm:text-base">The cost of intelligence,<span x-show="nsfwActive" x-cloak> <span class="text-pink-400">attention,</span></span> tracked.</p>
+                    <p class="text-gray-500 mt-1 text-sm">The cost of intelligence,<span x-show="nsfwActive" x-cloak> <span class="text-pink-400">attention,</span></span> tracked.</p>
                 </div>
-                <div class="text-right text-xs text-gray-500">
-                    <p>Last updated</p>
-                    <p class="text-gray-400 font-mono">2026-03-13</p>
-                    <p class="mt-1"><span x-text="models.length"></span> models tracked</p>
+                <div class="text-right text-xs text-gray-600 font-mono">
+                    <p>updated 2026-03-13</p>
+                    <p class="mt-1"><span x-text="models.length"></span> models</p>
                 </div>
             </div>
 
-            <!-- Tabs + Currency -->
-            <nav class="flex items-center mt-6 border-b border-gray-800 -mb-px">
+            <nav class="flex items-center mt-6 border-b border-gray-800/60 -mb-px">
                 <div class="flex gap-6">
                     <button @click="tab = 'table'"
-                            :class="tab === 'table' ? 'tab-active' : 'text-gray-400 border-transparent'"
-                            class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
+                            :class="tab === 'table' ? 'tab-active' : 'text-gray-500 border-transparent'"
+                            class="pb-3 border-b-2 text-sm transition-colors hover:text-gray-300">
                         Compare
                     </button>
                     <button @click="tab = 'calculator'"
-                            :class="tab === 'calculator' ? 'tab-active' : 'text-gray-400 border-transparent'"
-                            class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
+                            :class="tab === 'calculator' ? 'tab-active' : 'text-gray-500 border-transparent'"
+                            class="pb-3 border-b-2 text-sm transition-colors hover:text-gray-300">
                         Calculator
                     </button>
                     <button @click="tab = 'trends'"
-                            :class="tab === 'trends' ? 'tab-active' : 'text-gray-400 border-transparent'"
-                            class="pb-3 border-b-2 font-medium text-sm transition-colors hover:text-gray-200">
+                            :class="tab === 'trends' ? 'tab-active' : 'text-gray-500 border-transparent'"
+                            class="pb-3 border-b-2 text-sm transition-colors hover:text-gray-300">
                         Trends
                     </button>
                 </div>
                 <div class="ml-auto flex items-center gap-1 pb-3">
                     <template x-for="c in currencies" :key="c.id">
                         <button @click="setCurrency(c.id)"
-                                :class="currency === c.id ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'"
-                                class="px-2 py-1 rounded text-[11px] font-mono font-medium transition-colors"
+                                :class="currency === c.id ? 'text-gray-200' : 'text-gray-600 hover:text-gray-400'"
+                                class="px-2 py-1 text-[11px] font-mono transition-colors"
                                 x-text="c.symbol"></button>
                     </template>
                 </div>
@@ -95,37 +92,32 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- Loading -->
         <div x-show="loading" class="flex items-center justify-center py-20">
-            <div class="text-gray-400">Loading pricing data...</div>
+            <div class="text-gray-500 font-mono text-sm">loading...</div>
         </div>
 
         <!-- ==================== TABLE TAB ==================== -->
         <div x-show="tab === 'table' && !loading" x-cloak>
 
-            <!-- Filters -->
             <div class="flex items-center gap-2 mb-6 flex-wrap">
-                <!-- Search -->
                 <div class="relative min-w-[160px] max-w-[200px]">
                     <input type="text" x-model="search" placeholder="Search..."
-                           class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-1.5 text-xs text-gray-100 placeholder-gray-500 focus:outline-none focus:border-tkn-500">
-                    <kbd class="absolute right-2 top-1.5 text-[10px] text-gray-600 font-mono">/</kbd>
+                           class="w-full bg-transparent border border-gray-800 px-3 py-1.5 text-xs text-gray-100 placeholder-gray-600 focus:outline-none focus:border-gray-600">
+                    <kbd class="absolute right-2 top-1.5 text-[10px] text-gray-700 font-mono">/</kbd>
                 </div>
 
-                <!-- Provider pills -->
                 <template x-for="provider in providers" :key="provider.id">
                     <button @click="toggleProvider(provider.id)"
-                            :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20 ring-1 ring-white/20' : (highlightProvider ? 'border-opacity-30 bg-opacity-0 opacity-50' : 'border-opacity-50 bg-opacity-0')"
-                            :style="`border-color: ${provider.color}; background-color: ${provider.color}`"
-                            class="flex items-center gap-1 px-2 py-1 rounded-full border text-[11px] font-medium transition-all cursor-pointer hover:opacity-100">
-                        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${provider.color}`"></span>
+                            :class="isProviderActive(provider.id) ? 'text-gray-100' : (highlightProvider ? 'opacity-35' : '')"
+                            :style="`border-color: ${provider.color}40`"
+                            class="flex items-center gap-1.5 px-2 py-1 border text-[11px] text-gray-400 transition-all cursor-pointer hover:text-gray-200">
+                        <span class="provider-dot" :style="`background-color: ${provider.color}`"></span>
                         <span x-text="provider.display_name"></span>
                     </button>
                 </template>
 
-                <!-- Tier dropdown -->
                 <select x-model="filterTier"
-                        class="bg-gray-900 border border-gray-700 rounded px-2 py-1.5 text-[11px] text-gray-100 focus:outline-none focus:border-tkn-500">
+                        class="bg-transparent border border-gray-800 px-2 py-1.5 text-[11px] text-gray-400 focus:outline-none focus:border-gray-600">
                     <option value="all">All tiers</option>
                     <option value="flagship">Flagship</option>
                     <option value="balanced">Balanced</option>
@@ -134,11 +126,10 @@
                 </select>
             </div>
 
-            <!-- Table -->
-            <div class="overflow-x-auto rounded-xl border border-gray-800">
+            <div class="overflow-x-auto border border-gray-800/60">
                 <table class="w-full price-table">
                     <thead>
-                        <tr class="bg-gray-900/50 text-gray-400 text-xs uppercase tracking-wider">
+                        <tr class="text-gray-500 text-xs uppercase tracking-wider border-b border-gray-800/60">
                             <th class="text-left px-4 py-3" @click="toggleSort('name')">
                                 Model <span class="ml-1" x-text="sortIcon('name')"></span>
                             </th>
@@ -167,42 +158,47 @@
                     </thead>
                     <tbody>
                         <template x-for="model in filteredModels" :key="model.id">
-                            <tr class="border-t border-gray-800/50 hover:bg-gray-900/30 transition-all duration-200"
+                            <tr class="border-t border-gray-800/30 hover:bg-white/[0.02] transition-opacity duration-150"
                                 :style="isHighlighted(model) ? 'opacity: 1' : 'opacity: 0.35'">
-                                <td class="px-4 py-3">
-                                    <div>
-                                        <span class="font-medium text-sm" x-text="model.name"></span>
-                                        <span x-show="model.params" class="ml-1.5 text-[10px] text-gray-500 font-mono" x-text="model.params"></span>
-                                    </div>
+                                <td class="px-4 py-2.5">
+                                    <span class="text-sm" x-text="model.name"></span>
+                                    <span x-show="model.params" class="ml-1.5 text-[10px] text-gray-600 font-mono" x-text="model.params"></span>
                                 </td>
-                                <td class="px-4 py-3">
+                                <td class="px-4 py-2.5">
                                     <div class="flex items-center gap-2">
                                         <span class="provider-dot" :style="`background-color: ${providerColor(model.provider)}`"></span>
-                                        <span class="text-sm text-gray-300" x-text="providerName(model.provider)"></span>
+                                        <span class="text-sm text-gray-400" x-text="providerName(model.provider)"></span>
                                     </div>
                                 </td>
-                                <td class="px-4 py-3 text-center">
-                                    <span class="feature-badge" :class="tierColor(model.tier)" x-text="tierLabel(model.tier)"></span>
+                                <td class="px-4 py-2.5 text-center">
+                                    <span class="text-[11px]"
+                                          :class="{
+                                              'text-amber-500/70': model.tier === 'flagship',
+                                              'text-blue-400/70': model.tier === 'balanced',
+                                              'text-green-400/70': model.tier === 'budget',
+                                              'text-pink-400/70': model.tier === 'attention'
+                                          }"
+                                          x-text="tierLabel(model.tier)"></span>
                                 </td>
-                                <td class="px-4 py-3 text-right font-mono text-sm"
-                                    :class="model.input_price === minInput ? 'cheapest-cell' : 'text-gray-300'">
+                                <td class="px-4 py-2.5 text-right font-mono text-sm"
+                                    :class="model.input_price === minInput ? 'cheapest-cell' : 'text-gray-400'">
                                     <span x-text="formatPrice(model.input_price)"></span>
                                 </td>
-                                <td class="px-4 py-3 text-right font-mono text-sm"
-                                    :class="model.output_price === minOutput ? 'cheapest-cell' : 'text-gray-300'">
+                                <td class="px-4 py-2.5 text-right font-mono text-sm"
+                                    :class="model.output_price === minOutput ? 'cheapest-cell' : 'text-gray-400'">
                                     <span x-text="formatPrice(model.output_price)"></span>
                                 </td>
-                                <td class="px-4 py-3 text-right font-mono text-sm text-gray-300">
+                                <td class="px-4 py-2.5 text-right font-mono text-sm text-gray-500">
                                     <span x-show="model.tier !== 'attention'" x-text="formatContext(model.context_window)"></span>
-                                    <span x-show="model.tier === 'attention'" class="text-pink-400/60 text-xs">&infin;</span>
+                                    <span x-show="model.tier === 'attention'" class="text-pink-400/40">&infin;</span>
                                 </td>
-                                <td class="px-4 py-3 text-center">
-                                    <span x-show="model.speed" class="feature-badge"
-                                          :class="{'bg-green-500/20 text-green-400': model.speed === 'fast', 'bg-yellow-500/20 text-yellow-400': model.speed === 'medium', 'bg-red-500/20 text-red-400': model.speed === 'slow'}"
+                                <td class="px-4 py-2.5 text-center">
+                                    <span x-show="model.speed" class="text-[11px]"
+                                          :class="{'text-green-400/60': model.speed === 'fast', 'text-yellow-400/60': model.speed === 'medium', 'text-red-400/60': model.speed === 'slow'}"
                                           x-text="model.speed"></span>
                                 </td>
-                                <td class="px-4 py-3 hidden lg:table-cell">
-                                    <span class="text-xs text-gray-500" x-text="model.description || model.notes || ''"></span>
+                                <td class="px-4 py-2.5 hidden lg:table-cell">
+                                    <span class="text-xs text-gray-600" x-text="model.description || model.notes || ''"></span>
                                 </td>
                             </tr>
                         </template>
@@ -211,12 +207,11 @@
             </div>
 
             <p class="text-xs text-gray-600 mt-4">
-                Prices per 1M tokens. Source: official provider pricing pages.
-                <span class="text-tkn-500/50 cheapest-cell">Green</span> = cheapest in current view.
+                Prices per 1M tokens. Source – official provider pricing pages.
+                <span class="cheapest-cell">Green</span> = cheapest in view.
             </p>
-            <p x-show="nsfwActive" x-cloak class="text-xs text-pink-400/50 mt-2">
-                Attention economy tokens normalized to $/1M for comparison.
-                Input = buy price. Output = performer payout. A token of attention costs more than a token of intelligence.
+            <p x-show="nsfwActive" x-cloak class="text-xs text-pink-400/40 mt-2">
+                Attention tokens normalized to $/1M. Input = buy price. Output = performer payout.
             </p>
         </div>
 
@@ -224,109 +219,100 @@
         <div x-show="tab === 'calculator'" x-cloak x-data="calculator">
 
             <div>
-                <h2 class="text-xl font-semibold mb-6">Cost Calculator</h2>
-                <p class="text-gray-400 text-sm mb-6">Estimate your monthly cost per model based on usage.</p>
+                <h2 class="text-lg font-medium mb-1">Cost Calculator</h2>
+                <p class="text-gray-500 text-sm mb-6">Estimate monthly cost per model.</p>
 
-                <!-- Provider pills -->
                 <div class="flex items-center gap-2 mb-8 flex-wrap">
                     <template x-for="provider in providers" :key="provider.id">
                         <button @click="toggleProvider(provider.id)"
-                                :class="isProviderActive(provider.id) ? 'border-opacity-100 bg-opacity-20 ring-1 ring-white/20' : (highlightProvider ? 'border-opacity-30 bg-opacity-0 opacity-50' : 'border-opacity-50 bg-opacity-0')"
-                                :style="`border-color: ${provider.color}; background-color: ${provider.color}`"
-                                class="flex items-center gap-1 px-2 py-1 rounded-full border text-[11px] font-medium transition-all cursor-pointer hover:opacity-100">
-                            <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${provider.color}`"></span>
+                                :class="isProviderActive(provider.id) ? 'text-gray-100' : (highlightProvider ? 'opacity-35' : '')"
+                                :style="`border-color: ${provider.color}40`"
+                                class="flex items-center gap-1.5 px-2 py-1 border text-[11px] text-gray-400 transition-all cursor-pointer hover:text-gray-200">
+                            <span class="provider-dot" :style="`background-color: ${provider.color}`"></span>
                             <span x-text="provider.display_name"></span>
                         </button>
                     </template>
                 </div>
 
-                <!-- Inputs -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2">
-                            Monthly input tokens: <span class="text-white font-mono font-semibold" x-text="formatTokens(inputTokens)"></span>
+                        <label class="block text-sm text-gray-500 mb-2">
+                            Input tokens/mo <span class="text-gray-300 font-mono" x-text="formatTokens(inputTokens)"></span>
                         </label>
                         <input type="range" x-model="inputSlider" min="0" max="100" step="1" class="w-full">
-                        <div class="flex justify-between text-xs text-gray-600 mt-1">
+                        <div class="flex justify-between text-[10px] text-gray-700 mt-1 font-mono">
                             <span>10K</span><span>100K</span><span>1M</span><span>10M</span><span>100M</span>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm text-gray-400 mb-2">
-                            Monthly output tokens: <span class="text-white font-mono font-semibold" x-text="formatTokens(outputTokens)"></span>
+                        <label class="block text-sm text-gray-500 mb-2">
+                            Output tokens/mo <span class="text-gray-300 font-mono" x-text="formatTokens(outputTokens)"></span>
                         </label>
                         <input type="range" x-model="outputSlider" min="0" max="100" step="1" class="w-full">
-                        <div class="flex justify-between text-xs text-gray-600 mt-1">
+                        <div class="flex justify-between text-[10px] text-gray-700 mt-1 font-mono">
                             <span>10K</span><span>100K</span><span>1M</span><span>10M</span><span>100M</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Results -->
-                <div class="space-y-2">
+                <div class="space-y-1">
                     <template x-for="(r, i) in results" :key="r.id">
-                        <div class="flex items-center gap-4 py-2.5 px-4 rounded-lg transition-all duration-200"
-                             :class="i === 0 ? 'bg-tkn-500/10 border border-tkn-500/30' : 'bg-gray-900/30'"
+                        <div class="flex items-center gap-4 py-2 px-3 transition-opacity duration-150"
+                             :class="i === 0 ? 'border-l-2 border-tkn-500' : 'border-l-2 border-transparent'"
                              :style="!highlightProvider || r.provider === highlightProvider ? 'opacity: 1' : 'opacity: 0.35'">
-                            <!-- Rank -->
-                            <span class="text-xs font-mono w-6 text-gray-500" x-text="'#' + (i + 1)"></span>
+                            <span class="text-[10px] font-mono w-5 text-gray-600" x-text="i + 1"></span>
 
-                            <!-- Provider dot + name -->
-                            <div class="flex items-center gap-2 w-48 flex-shrink-0">
+                            <div class="flex items-center gap-2 w-44 flex-shrink-0">
                                 <span class="provider-dot" :style="`background-color: ${providerColor(r.provider)}`"></span>
-                                <span class="text-sm font-medium truncate" x-text="r.name"></span>
+                                <span class="text-sm truncate" x-text="r.name"></span>
                             </div>
 
-                            <!-- Bar -->
-                            <div class="flex-1 h-6 bg-gray-800 rounded overflow-hidden">
-                                <div class="calc-bar h-full rounded"
-                                     :style="`width: ${r.barWidth}%; background-color: ${providerColor(r.provider)}`">
+                            <div class="flex-1 h-4 bg-gray-900 overflow-hidden">
+                                <div class="calc-bar h-full"
+                                     :style="`width: ${r.barWidth}%; background-color: ${providerColor(r.provider)}40`">
                                 </div>
                             </div>
 
-                            <!-- Cost -->
-                            <div class="text-right w-28 flex-shrink-0">
-                                <span class="font-mono text-sm font-semibold"
-                                      :class="i === 0 ? 'text-tkn-400' : 'text-gray-300'"
+                            <div class="text-right w-24 flex-shrink-0">
+                                <span class="font-mono text-sm"
+                                      :class="i === 0 ? 'text-tkn-400' : 'text-gray-400'"
                                       x-text="formatCost(r.monthlyCost)"></span>
-                                <span class="text-xs text-gray-500">/mo</span>
+                                <span class="text-[10px] text-gray-600">/mo</span>
                             </div>
 
-                            <!-- Savings -->
-                            <div class="text-right w-20 flex-shrink-0">
-                                <span x-show="r.savingsPercent > 0" class="text-xs text-tkn-400 font-mono"
-                                      x-text="r.savingsPercent + '% less'"></span>
+                            <div class="text-right w-16 flex-shrink-0">
+                                <span x-show="r.savingsPercent > 0" class="text-[10px] text-gray-500 font-mono"
+                                      x-text="'-' + r.savingsPercent + '%'"></span>
                             </div>
                         </div>
                     </template>
                 </div>
 
-                <div x-show="results.length > 1" class="mt-6 p-4 rounded-lg bg-tkn-500/5 border border-tkn-500/20">
-                    <p class="text-sm text-gray-300">
-                        Cheapest: <strong class="text-tkn-400" x-text="results[0]?.name"></strong> at
-                        <strong class="text-tkn-400 font-mono" x-text="formatCost(results[0]?.monthlyCost || 0)"></strong>/mo.
-                        You'd save
-                        <strong class="text-tkn-400 font-mono" x-text="formatCost(results[results.length-1]?.monthlyCost - results[0]?.monthlyCost)"></strong>/mo
+                <div x-show="results.length > 1" class="mt-6 py-3 px-3 border-l-2 border-gray-800">
+                    <p class="text-sm text-gray-500">
+                        Cheapest – <span class="text-gray-300" x-text="results[0]?.name"></span> at
+                        <span class="text-gray-300 font-mono" x-text="formatCost(results[0]?.monthlyCost || 0)"></span>/mo.
+                        Save
+                        <span class="text-gray-300 font-mono" x-text="formatCost(results[results.length-1]?.monthlyCost - results[0]?.monthlyCost)"></span>/mo
                         vs <span x-text="results[results.length-1]?.name"></span>.
                     </p>
                 </div>
 
-                <!-- Attention economy comparison (when 18+ active) -->
-                <div x-show="attentionResults.length > 0" x-cloak class="mt-8 pt-8 border-t border-pink-500/20">
-                    <h3 class="text-lg font-semibold text-pink-400 mb-4">Attention Economy</h3>
-                    <p class="text-xs text-gray-500 mb-4">Same number of tokens, but for human attention instead of compute.</p>
-                    <div class="space-y-2">
+                <div x-show="attentionResults.length > 0" x-cloak class="mt-8 pt-6 border-t border-gray-800/40">
+                    <h3 class="text-sm text-pink-400/70 mb-1">Attention Economy</h3>
+                    <p class="text-[11px] text-gray-600 mb-4">Same token count, human attention instead of compute.</p>
+                    <div class="space-y-1">
                         <template x-for="(a, i) in attentionResults" :key="a.id">
-                            <div class="flex items-center gap-4 py-2 px-4 rounded-lg bg-pink-500/5 border border-pink-500/10">
-                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" :style="`background-color: ${providerColor(a.provider)}`"></span>
-                                <span class="text-sm font-medium w-40 truncate" x-text="a.name"></span>
+                            <div class="flex items-center gap-4 py-2 px-3">
+                                <span class="provider-dot" :style="`background-color: ${providerColor(a.provider)}`"></span>
+                                <span class="text-sm w-36 truncate" x-text="a.name"></span>
                                 <div class="flex-1 text-right">
-                                    <span class="font-mono text-sm text-pink-400" x-text="formatCost(a.totalCost)"></span>
-                                    <span class="text-xs text-gray-500"> buy</span>
+                                    <span class="font-mono text-sm text-pink-400/70" x-text="formatCost(a.totalCost)"></span>
+                                    <span class="text-[10px] text-gray-600"> buy</span>
                                 </div>
-                                <div class="text-right w-32">
-                                    <span class="font-mono text-sm text-gray-400" x-text="formatCost(a.performerEarns)"></span>
-                                    <span class="text-xs text-gray-500"> to performer</span>
+                                <div class="text-right w-28">
+                                    <span class="font-mono text-sm text-gray-500" x-text="formatCost(a.performerEarns)"></span>
+                                    <span class="text-[10px] text-gray-600"> payout</span>
                                 </div>
                             </div>
                         </template>
@@ -340,29 +326,29 @@
         <div x-show="tab === 'trends'" x-cloak x-data="trends">
 
             <div>
-                <h2 class="text-xl font-semibold mb-2">Price Trends</h2>
-                <p class="text-gray-400 text-sm mb-6">Flagship model price comparison. Tracking since March 2026.</p>
+                <h2 class="text-lg font-medium mb-1">Price Trends</h2>
+                <p class="text-gray-500 text-sm mb-6">Flagship model comparison. Tracking since March 2026.</p>
 
-                <!-- Chart type toggle -->
                 <div class="flex gap-3 mb-6">
                     <button @click="chartType = 'input'"
-                            :class="chartType === 'input' ? 'bg-gray-700 text-white' : 'text-gray-400'"
-                            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">
-                        Input price
+                            :class="chartType === 'input' ? 'text-gray-200' : 'text-gray-600'"
+                            class="text-sm transition-colors hover:text-gray-400">
+                        Input
                     </button>
+                    <span class="text-gray-700">/</span>
                     <button @click="chartType = 'output'"
-                            :class="chartType === 'output' ? 'bg-gray-700 text-white' : 'text-gray-400'"
-                            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">
-                        Output price
+                            :class="chartType === 'output' ? 'text-gray-200' : 'text-gray-600'"
+                            class="text-sm transition-colors hover:text-gray-400">
+                        Output
                     </button>
                 </div>
 
-                <div class="bg-gray-900/30 rounded-xl border border-gray-800 p-6" style="height: 400px;">
+                <div class="border border-gray-800/60 p-6" style="height: 400px;">
                     <canvas id="priceChart"></canvas>
                 </div>
 
                 <p class="text-xs text-gray-600 mt-4">
-                    Showing flagship models only. More data points will appear as prices are tracked monthly.
+                    Flagship models only. More data points as prices are tracked monthly.
                 </p>
 
             </div>
@@ -372,7 +358,7 @@
 
     <!-- Cryptic signup banner -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16" x-data="{ email: '', submitted: false }">
-        <div x-show="!submitted" class="flex items-center gap-4 justify-between py-6 border-t border-gray-800/50">
+        <div x-show="!submitted" class="flex items-center gap-4 justify-between py-6 border-t border-gray-800/30">
             <p class="text-[11px] text-gray-600 font-mono leading-snug">
                 When the three economies merge, which side will you be on?
                 <span class="text-gray-700 block mt-0.5">The unit is coming.</span>
@@ -384,42 +370,38 @@
                 </p>
                 <div class="flex gap-2">
                     <input type="email" x-model="email" placeholder="your@email"
-                           class="w-40 bg-gray-900/50 border border-gray-800 rounded px-3 py-1 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
+                           class="w-40 bg-transparent border border-gray-800 px-3 py-1 text-xs text-gray-400 placeholder-gray-700 focus:outline-none focus:border-gray-600">
                     <button @click="submitted = true"
-                            class="px-3 py-1 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
+                            class="px-3 py-1 text-[10px] font-mono border border-gray-800 text-gray-600 hover:text-gray-400 hover:border-gray-600 transition-colors">
                         signal
                     </button>
                 </div>
             </div>
         </div>
-        <p x-show="submitted" x-cloak class="text-[11px] text-gray-600 font-mono py-6 border-t border-gray-800/50">
+        <p x-show="submitted" x-cloak class="text-[11px] text-gray-600 font-mono py-6 border-t border-gray-800/30">
             Noted. You'll know when the unit is ready.
         </p>
     </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-gray-800">
+    <footer class="border-t border-gray-800/30 mt-2">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <p class="text-sm text-gray-400">
-                        Built by <span class="text-tkn-500 font-semibold">TKN</span> — one token, every economy.
+                    <p class="text-sm text-gray-500">
+                        Built by <span class="text-tkn-500">TKN</span> – one token, every economy.
                     </p>
-                    <p class="text-xs text-gray-600 mt-1">
-                        Free, open source, updated weekly. Data sourced from official pricing pages.
+                    <p class="text-xs text-gray-700 mt-1">
+                        Free, open source, updated weekly. Data from official pricing pages.
                     </p>
                 </div>
-                <div class="text-right">
-                    <a href="manifesto.html" class="text-xs text-gray-600 hover:text-tkn-500 transition-colors">
-                        What happens when all value is measured in tokens?
-                    </a>
-                </div>
+                <a href="manifesto.html" class="text-xs text-gray-700 hover:text-gray-400 transition-colors">
+                    What happens when all value is measured in tokens?
+                </a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Keyboard shortcut: / to focus search
         document.addEventListener('keydown', (e) => {
             if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
                 const input = document.querySelector('input[type="text"]');
