@@ -11,7 +11,7 @@ document.addEventListener('alpine:init', () => {
             this.nsfwActive = !!window._tknNsfw;
             window.addEventListener('tkn-data-changed', () => {
                 this.nsfwActive = !!window._tknNsfw;
-                this.renderAttentionChart();
+                this.$nextTick(() => this.renderAttentionChart());
             });
             this.$nextTick(() => {
                 this.renderChart();
