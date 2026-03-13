@@ -100,16 +100,22 @@
             <div x-show="!submitted" class="flex items-center gap-4 justify-between">
                 <p class="text-[11px] text-gray-600 font-mono leading-snug">
                     <span x-show="tab === 'calculator'">When the three economies merge, which side will you be on?</span>
-                    <span x-show="tab === 'trends'">200 TKN/day for a bot. 15,000 for a human. The market won't care.</span>
+                    <span x-show="tab === 'trends'">The price of a thought is falling. The price of a glance is not.</span>
                     <span class="text-gray-700 block mt-0.5">The unit is coming.</span>
                 </p>
-                <div class="flex gap-2 flex-shrink-0">
-                    <input type="email" x-model="email" placeholder="your@email"
-                           class="w-40 bg-gray-900/50 border border-gray-800 rounded px-3 py-1 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
-                    <button @click="submitted = true"
-                            class="px-3 py-1 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
-                        signal
-                    </button>
+                <div class="flex items-center gap-4 flex-shrink-0">
+                    <p class="text-[11px] text-gray-700 font-mono leading-snug text-right hidden sm:block">
+                        200 TKN/day for a bot. 15,000 for a human.<br>
+                        <span class="text-gray-600">The market won't care.</span>
+                    </p>
+                    <div class="flex gap-2">
+                        <input type="email" x-model="email" placeholder="your@email"
+                               class="w-40 bg-gray-900/50 border border-gray-800 rounded px-3 py-1 text-xs text-gray-300 placeholder-gray-700 focus:outline-none focus:border-gray-600">
+                        <button @click="submitted = true"
+                                class="px-3 py-1 rounded text-[10px] font-mono font-semibold bg-gray-800/50 border border-gray-700/30 text-gray-500 hover:text-gray-300 hover:border-gray-600 transition-all">
+                            signal
+                        </button>
+                    </div>
                 </div>
             </div>
             <p x-show="submitted" x-cloak class="text-[11px] text-gray-600 font-mono">
