@@ -5,19 +5,40 @@ document.addEventListener('alpine:init', () => {
         archiveData: null,
         showBudget: false,
         nsfwActive: false,
+        visible: false,
 
         async init() {
             this.archiveData = await fetch('data/archive.json').then(r => r.json()).catch(() => null);
             this.nsfwActive = !!window._tknNsfw;
+
             window.addEventListener('tkn-data-changed', () => {
                 this.nsfwActive = !!window._tknNsfw;
-                this.$nextTick(() => this.renderAttentionChart());
+                if (this.nsfwActive && this.visible) {
+                    // Wait for x-show transition then render
+                    setTimeout(() => this.renderAttentionChart(), 50);
+                }
             });
-            this.$nextTick(() => {
-                this.renderChart();
-                this.renderAttentionChart();
+
+            // Watch for tab visibility via ResizeObserver on the container
+            const el = this.$el;
+            const observer = new ResizeObserver(() => {
+                const nowVisible = el.offsetWidth > 0 && el.offsetHeight > 0;
+                if (nowVisible && !this.visible) {
+                    this.visible = true;
+                    this.$nextTick(() => {
+                        this.renderChart();
+                        if (this.nsfwActive) {
+                            setTimeout(() => this.renderAttentionChart(), 50);
+                        }
+                    });
+                }
+                this.visible = nowVisible;
             });
-            this.$watch('showBudget', () => this.renderChart());
+            observer.observe(el);
+
+            this.$watch('showBudget', () => {
+                if (this.visible) this.renderChart();
+            });
         },
 
         renderChart() {
@@ -146,12 +167,10 @@ document.addEventListener('alpine:init', () => {
             const canvas = document.getElementById('attentionArchiveChart');
             if (!canvas || !this.archiveData || !this.archiveData.attention) return;
 
-            if (this.attentionChart) this.attentionChart.destroy();
+            // Check canvas is actually visible
+            if (canvas.offsetWidth === 0 || canvas.offsetHeight === 0) return;
 
-            if (!this.nsfwActive) {
-                this.attentionChart = null;
-                return;
-            }
+            if (this.attentionChart) this.attentionChart.destroy();
 
             const series = this.archiveData.attention;
 
