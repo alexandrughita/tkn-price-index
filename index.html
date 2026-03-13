@@ -380,6 +380,20 @@
                 <p class="text-xs text-gray-600 mt-4">
                     Input price per 1M tokens, log scale. Step lines – price holds until next model release.
                 </p>
+
+                <!-- Attention economy archive (18+ only) -->
+                <div x-show="nsfwActive" x-cloak class="mt-10 pt-8 border-t border-gray-800/40">
+                    <h3 class="text-sm text-pink-400/70 mb-1">Attention Economy – Price History</h3>
+                    <p class="text-gray-600 text-[11px] mb-6">Buy price per token since platform launch. The price of a glance barely moves.</p>
+
+                    <div class="border border-gray-800/60 p-6" style="height: 360px;">
+                        <canvas id="attentionArchiveChart"></canvas>
+                    </div>
+
+                    <p class="text-xs text-gray-600 mt-4">
+                        Per-token buy price ($). AI compute dropped 1000x. Attention tokens held flat.
+                    </p>
+                </div>
             </div>
         </div>
 

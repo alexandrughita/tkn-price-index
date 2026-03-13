@@ -95,5 +95,61 @@
         { "date": "2026-02", "price": 2.00, "model": "Grok 4.20 Beta" }
       ]
     }
+  ],
+  "attention": [
+    {
+      "provider": "chaturbate",
+      "label": "Chaturbate",
+      "color": "#F97316",
+      "points": [
+        { "date": "2011-02", "price": 0.10, "model": "Chaturbate Token" },
+        { "date": "2014-01", "price": 0.09, "model": "Chaturbate Token" },
+        { "date": "2018-01", "price": 0.09, "model": "Chaturbate Token" },
+        { "date": "2022-01", "price": 0.09, "model": "Chaturbate Token" },
+        { "date": "2026-03", "price": 0.09, "model": "Chaturbate Token" }
+      ]
+    },
+    {
+      "provider": "livejasmin",
+      "label": "LiveJasmin",
+      "color": "#EC4899",
+      "points": [
+        { "date": "2001-11", "price": 1.00, "model": "LiveJasmin Credit" },
+        { "date": "2010-01", "price": 0.99, "model": "LiveJasmin Credit" },
+        { "date": "2015-01", "price": 0.90, "model": "LiveJasmin Credit" },
+        { "date": "2020-01", "price": 0.85, "model": "LiveJasmin Credit" },
+        { "date": "2026-03", "price": 0.85, "model": "LiveJasmin Credit" }
+      ]
+    },
+    {
+      "provider": "stripchat",
+      "label": "Stripchat",
+      "color": "#A855F7",
+      "points": [
+        { "date": "2016-06", "price": 0.12, "model": "Stripchat Token" },
+        { "date": "2020-01", "price": 0.11, "model": "Stripchat Token" },
+        { "date": "2026-03", "price": 0.11, "model": "Stripchat Token" }
+      ]
+    },
+    {
+      "provider": "bongacams",
+      "label": "BongaCams",
+      "color": "#EF4444",
+      "points": [
+        { "date": "2012-05", "price": 0.08, "model": "BongaCams Token" },
+        { "date": "2018-01", "price": 0.075, "model": "BongaCams Token" },
+        { "date": "2026-03", "price": 0.075, "model": "BongaCams Token" }
+      ]
+    },
+    {
+      "provider": "myfreecams",
+      "label": "MyFreeCams",
+      "color": "#F472B6",
+      "points": [
+        { "date": "2004-01", "price": 0.10, "model": "MyFreeCams Token" },
+        { "date": "2010-01", "price": 0.10, "model": "MyFreeCams Token" },
+        { "date": "2026-03", "price": 0.10, "model": "MyFreeCams Token" }
+      ]
+    }
   ]
 }
