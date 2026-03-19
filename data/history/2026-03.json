@@ -1,5 +1,5 @@
 {
-  "date": "2026-03-16",
+  "date": "2026-03-19",
   "models": [
     {
       "id": "claude-opus-4-6",
@@ -58,8 +58,8 @@
     },
     {
       "id": "gpt-4.1",
-      "input_price": 2,
-      "output_price": 8
+      "input_price": 10,
+      "output_price": 25
     },
     {
       "id": "gpt-4.1-mini",
@@ -83,8 +83,8 @@
     },
     {
       "id": "o3",
-      "input_price": 2,
-      "output_price": 8
+      "input_price": 5,
+      "output_price": 20
     },
     {
       "id": "o3-mini",
@@ -93,8 +93,8 @@
     },
     {
       "id": "o4-mini",
-      "input_price": 0.55,
-      "output_price": 2.2
+      "input_price": 1,
+      "output_price": 4
     },
     {
       "id": "gemini-3.1-pro",
