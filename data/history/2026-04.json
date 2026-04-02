@@ -1,0 +1,200 @@
+{
+  "date": "2026-04-02",
+  "models": [
+    {
+      "id": "claude-opus-4-6",
+      "input_price": 5,
+      "output_price": 25
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "input_price": 3,
+      "output_price": 15
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "input_price": 1,
+      "output_price": 5
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "input_price": 3,
+      "output_price": 15
+    },
+    {
+      "id": "claude-opus-4-1",
+      "input_price": 15,
+      "output_price": 75
+    },
+    {
+      "id": "claude-3-haiku",
+      "input_price": 0.25,
+      "output_price": 1.25
+    },
+    {
+      "id": "gpt-5.4",
+      "input_price": 2.5,
+      "output_price": 15
+    },
+    {
+      "id": "gpt-5.2",
+      "input_price": 1.75,
+      "output_price": 14
+    },
+    {
+      "id": "gpt-5.1",
+      "input_price": 1.25,
+      "output_price": 10
+    },
+    {
+      "id": "gpt-5-mini",
+      "input_price": 0.25,
+      "output_price": 2
+    },
+    {
+      "id": "gpt-5-nano",
+      "input_price": 0.05,
+      "output_price": 0.4
+    },
+    {
+      "id": "gpt-4.1",
+      "input_price": 10,
+      "output_price": 25
+    },
+    {
+      "id": "gpt-4.1-mini",
+      "input_price": 0.4,
+      "output_price": 1.6
+    },
+    {
+      "id": "gpt-4.1-nano",
+      "input_price": 0.1,
+      "output_price": 0.4
+    },
+    {
+      "id": "gpt-4o",
+      "input_price": 2.5,
+      "output_price": 10
+    },
+    {
+      "id": "gpt-4o-mini",
+      "input_price": 0.15,
+      "output_price": 0.6
+    },
+    {
+      "id": "o3",
+      "input_price": 5,
+      "output_price": 20
+    },
+    {
+      "id": "o3-mini",
+      "input_price": 1.1,
+      "output_price": 4.4
+    },
+    {
+      "id": "o4-mini",
+      "input_price": 1,
+      "output_price": 4
+    },
+    {
+      "id": "gemini-3.1-pro",
+      "input_price": 4.5,
+      "output_price": 4.5
+    },
+    {
+      "id": "gemini-3.1-flash-lite",
+      "input_price": 1,
+      "output_price": 1
+    },
+    {
+      "id": "gemini-2.5-pro",
+      "input_price": 4.5,
+      "output_price": 4.5
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "input_price": 1,
+      "output_price": 1
+    },
+    {
+      "id": "gemini-2.5-flash-lite",
+      "input_price": 0.1,
+      "output_price": 0.4
+    },
+    {
+      "id": "mistral-large-3",
+      "input_price": 0.5,
+      "output_price": 1.5
+    },
+    {
+      "id": "mistral-medium-3.1",
+      "input_price": 0.4,
+      "output_price": 2
+    },
+    {
+      "id": "mistral-small-3.2",
+      "input_price": 0.06,
+      "output_price": 0.18
+    },
+    {
+      "id": "mistral-small-3.1",
+      "input_price": 0.1,
+      "output_price": 0.3
+    },
+    {
+      "id": "codestral",
+      "input_price": 0.3,
+      "output_price": 0.9
+    },
+    {
+      "id": "magistral-medium",
+      "input_price": 2,
+      "output_price": 5
+    },
+    {
+      "id": "ministral-8b",
+      "input_price": 0.1,
+      "output_price": 0.1
+    },
+    {
+      "id": "mistral-nemo",
+      "input_price": 0.02,
+      "output_price": 0.04
+    },
+    {
+      "id": "grok-4.20-beta",
+      "input_price": 2,
+      "output_price": 6
+    },
+    {
+      "id": "grok-4-1-fast",
+      "input_price": 0.2,
+      "output_price": 0.5
+    },
+    {
+      "id": "grok-4-fast",
+      "input_price": 0.2,
+      "output_price": 0.5
+    },
+    {
+      "id": "grok-code-fast-1",
+      "input_price": 0.2,
+      "output_price": 1.5
+    },
+    {
+      "id": "grok-4",
+      "input_price": 3,
+      "output_price": 15
+    },
+    {
+      "id": "grok-3",
+      "input_price": 3,
+      "output_price": 15
+    },
+    {
+      "id": "grok-3-mini",
+      "input_price": 0.3,
+      "output_price": 0.5
+    }
+  ]
+}
