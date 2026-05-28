@@ -1,5 +1,5 @@
 {
-  "date": "2026-05-07",
+  "date": "2026-05-28",
   "models": [
     {
       "id": "claude-opus-4-6",
@@ -153,8 +153,8 @@
     },
     {
       "id": "ministral-8b",
-      "input_price": 0.1,
-      "output_price": 0.1
+      "input_price": 0.2,
+      "output_price": 0.2
     },
     {
       "id": "mistral-nemo",
